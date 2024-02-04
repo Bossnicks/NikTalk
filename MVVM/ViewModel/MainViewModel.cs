@@ -8,6 +8,9 @@ using System.Windows;
 using System.Data;
 using System.Windows.Threading;
 using Microsoft.EntityFrameworkCore;
+using System.Text;
+using System.Collections;
+using Microsoft.Win32;
 
 namespace WpfApp1.MVVM.ViewModel
 {
@@ -22,25 +25,55 @@ namespace WpfApp1.MVVM.ViewModel
 
 
         /* Commands */
+        public ICommand SendPictureCommand { get; set; }
         public ICommand SendCommand { get; set; }
+        public ICommand DeleteCommand { get; set; }
+        public ICommand EditCommand { get; set; }
+        public ICommand SaveCommand { get; set; }
         public ICommand ShowDialogMessagesCommand { get; set; }
 
-        static int authenticatedUserId = 1;
-        static ContactModel authenticatedUser = GetUserByEmailAndPasswordAsync("1@example.com", "your_password");
-
-        private DispatcherTimer timer;
-        private MessageModel _selectedContactMessage;
-
-        public MessageModel SelectedContactMessage
+        private static int authenticatedUserId = 1;
+        private static ContactModel authenticatedUser = GetUserByEmailAndPasswordAsync("1@example.com", "your_password");
+        public ContactModel AuthenticatedUser
         {
-            get { return _selectedContactMessage; }
+            get { return authenticatedUser; }
             set
             {
-                if (_selectedContactMessage != value)
+                if (authenticatedUser != value)
                 {
-                    _selectedContactMessage = value;
-                    OnPropertyChanged(nameof(SelectedContactMessage));
+                    authenticatedUser = value;
+                    OnPropertyChanged(nameof(AuthenticatedUser));
                 }
+            }
+        }
+
+        private DispatcherTimer timer;
+        private MessageModel _selectedMessage;
+
+        public MessageModel SelectedMessage
+        {
+            get { return _selectedMessage; }
+            set
+            {
+                _selectedMessage = value;
+                OnPropertyChanged("SelectedMessage");
+                //ShowDialogMessages();
+            }
+        }
+
+        private bool _isEditing = false;
+
+        public bool IsEditing
+        {
+            get { return _isEditing; }
+            set
+            {
+                _isEditing = value;
+                Application.Current.Dispatcher.Invoke(() =>
+                {
+                    OnPropertyChanged(nameof(IsEditing));
+                });
+                //ShowDialogMessages();
             }
         }
 
@@ -54,22 +87,25 @@ namespace WpfApp1.MVVM.ViewModel
             set
             {
                 _selectedContact = value;
+                IsEditing = false;
+                Message = String.Empty;
                 OnPropertyChanged("SelectedContact");
                 ShowDialogMessages();
+
             }
         }
 
-        //private string _message;
+        private string _message;
 
-        //public string Message
-        //{
-        //    get { return _message; }
-        //    set
-        //    {
-        //        _message = value;
-        //        OnPropertyChanged("Message");
-        //    }
-        //}
+        public string Message
+        {
+            get { return _message; }
+            set
+            {
+                _message = value;
+                OnPropertyChanged("Message");
+            }
+        }
 
         public ICommand MinimizeCommand { get; set; }
         public ICommand MaximizeRestoreCommand { get; set; }
@@ -80,19 +116,23 @@ namespace WpfApp1.MVVM.ViewModel
 
         public MainViewModel()
         {
-            try
-            {
-                //BeginData();
-            }
-            catch { }
+            //try
+            //{
+            //    //BeginData();
+            //}
+            //catch { }
             Messages = new ObservableCollection<MessageModel>();
             Contacts = new ObservableCollection<ContactModel>();
             LastMessages = new ObservableCollection<MessageModel>();
 
             //ShowDialogMessagesCommand = new RelayCommand(ShowDialogMessages);
 
-
             //SendCommand = new RelayCommand(Minimize, _ => !String.IsNullOrEmpty(Message));
+            DeleteCommand = new RelayCommand(DeleteMessageAsync);
+            SaveCommand = new RelayCommand(SaveMessageAsync);
+            EditCommand = new RelayCommand(EditMessageAsync);
+            SendPictureCommand = new RelayCommand(SendImageMessageAsync, _ => SelectedContact != null);
+            SendCommand = new RelayCommand(SendTextMessageAsync, _ => !String.IsNullOrEmpty(Message) && !IsEditing);
             MinimizeCommand = new RelayCommand(Minimize);
             MaximizeRestoreCommand = new RelayCommand(MaximizeRestore);
             CloseCommand = new RelayCommand(Close);
@@ -155,7 +195,7 @@ namespace WpfApp1.MVVM.ViewModel
                 };
                 dbContext.dbStickers.Add(sticker);
             }
-            dbContext.SaveChanges(); 
+            dbContext.SaveChanges();
         }
 
         public async Task LoadLatestMessageAsync()
@@ -163,13 +203,14 @@ namespace WpfApp1.MVVM.ViewModel
             MessageModel message;
             foreach (var contact in Contacts)
             {
-                if(contact != null)
+                if (contact != null)
                 {
                     Application.Current.Dispatcher.Invoke(() =>
                     {
 
                         message = GetLatestMessage(contact.UserId, authenticatedUserId);
-                        if (message.TypeOfMessage == "Image") {
+                        if (message.TypeOfMessage == "Image")
+                        {
                             contact.LastMessageView = "Image";
                         }
                         else if (message.TypeOfMessage == "Text")
@@ -281,57 +322,6 @@ namespace WpfApp1.MVVM.ViewModel
 
 
 
-        //public async void ShowDialogMessages()
-        //{
-        //    Messages.Clear();
-        //    //MessageBox.Show(SelectedContact.Id.ToString());
-        //    if (SelectedContact != null)
-        //    {
-        //        // Замените "your_authenticated_user_id" на ID авторизованного пользователя
-
-        //        using (var conn = new NpgsqlConnection("Host=DESKTOP-NFDA02C;Username=postgres;Password=1111;Database=Mess"))
-        //        {
-        //            conn.Open();
-
-        //            using (var cmd = new NpgsqlCommand("SELECT SenderID, MessageText, SentAt, ReceiverId, MessageId FROM Messages WHERE (SenderID = @authenticatedUserId AND ReceiverID = @contactId) OR (SenderID = @contactId AND ReceiverID = @authenticatedUserId) ORDER BY SentAt", conn))
-        //            {
-        //                cmd.Parameters.AddWithValue("authenticatedUserId", authenticatedUserId);
-        //                cmd.Parameters.AddWithValue("contactId", SelectedContact.userId); // Замените на актуальный ID выбранного контакта
-
-        //                using (var reader = await cmd.ExecuteReaderAsync())
-        //                {
-        //                    while (await reader.ReadAsync())
-        //                    {
-        //                        int senderId = reader.GetInt32(0);
-        //                        string messageText = reader.GetString(1);
-        //                        DateTime sentAt = reader.GetDateTime(2);
-        //                        int receiverId = reader.GetInt32(3);
-        //                        int messageId = reader.GetInt32(4);
-
-        //                        //Application.Current.Dispatcher.Invoke(() =>
-        //                        //{
-        //                        // Создаем объект сообщения
-        //                        var message = new MessageModel
-        //                        {
-        //                            MessageId = messageId,
-        //                            SenderId = senderId,
-        //                            ReceiverId = receiverId,
-        //                            Message = messageText,
-        //                            SentAt = sentAt,
-        //                        };
-
-        //                        // Добавляем сообщение в коллекцию сообщений выбранного контакта
-        //                        SelectedContact.Messages.Add(message);
-
-        //                        //});
-        //                    }
-        //                }
-        //            }
-        //        }
-        //    }
-        //}
-
-
         public void Minimize(object sender)
         {
             mainWindow.WindowState = WindowState.Minimized;
@@ -354,23 +344,159 @@ namespace WpfApp1.MVVM.ViewModel
             Application.Current.Shutdown();
         }
 
-        //public void UnchooseDialog(object sender)
+
+        public async void SendTextMessageAsync(object sender)
+        {
+            var message = new MessageModel()
+            {
+                SenderId = authenticatedUser.UserId,
+                ReceiverId = SelectedContact.UserId,
+                TypeOfMessage = "Text",
+                SentAt = DateTime.Now,
+                IsRead = false,
+                Message = Encoding.UTF8.GetBytes(Message),
+                UserName = authenticatedUser.UserName ?? "Unknown",
+                Image = AuthenticatedUser.Image ?? new byte[0]
+            };
+
+            // Преобразование текста в массив байтов и сохранение в свойство Message
+
+            Messages.Add(message);
+            Message = "";
+
+            var factory = new AppDbContextFactory();
+            var context = factory.CreateDbContext(null);
+            context.dbMessages.Add(message);
+            await context.SaveChangesAsync();
+        }
+
+        public async void SendImageMessageAsync(object sender)
+        {
+            if (SelectedContact != null)
+            {
+                var openFileDialog = new OpenFileDialog();
+                openFileDialog.Filter = "Image files (*.png;*.jfif;*.jpeg;*.jpg)|*.png;*.jfif;*.jpeg;*.jpg";
+
+                if (openFileDialog.ShowDialog() == true)
+                {
+                    var imagePath = openFileDialog.FileName;
+                    var imageBytes = GetImageBytes(imagePath);
+
+                    var message = new MessageModel()
+                    {
+                        SenderId = authenticatedUser.UserId,
+                        ReceiverId = SelectedContact.UserId,
+                        TypeOfMessage = "Image",
+                        SentAt = DateTime.Now,
+                        IsRead = false,
+                        Message = imageBytes,
+                        UserName = authenticatedUser.UserName ?? "Unknown",
+                        Image = authenticatedUser.Image ?? new byte[0]
+                    };
+
+                    Messages.Add(message);
+
+                    AppDbContextFactory factory = new AppDbContextFactory();
+                    AppDbContext context = factory.CreateDbContext(null);
+                    context.dbMessages.Add(message);
+                    await context.SaveChangesAsync();
+
+                }
+            }
+        }
+
+        private byte[] GetImageBytes(string imagePath)
+        {
+            try
+            {
+                return System.IO.File.ReadAllBytes(imagePath);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error reading image: {ex.Message}");
+                return null;
+            }
+        }
+
+
+        public async void DeleteMessageAsync(object sender)
+        {
+            if (sender is MessageModel)
+            {
+                AppDbContextFactory factory = new AppDbContextFactory();
+                AppDbContext context = factory.CreateDbContext(null);
+                MessageModel? elem = sender as MessageModel;
+                MessageModel? messageFromDb = await context.dbMessages.FindAsync(elem?.MessageId);
+                if (messageFromDb != null)
+                {
+                    // Удаляем объект из базы данных
+                    context.dbMessages.Remove(messageFromDb);
+                    await context.SaveChangesAsync();
+                }
+
+            }
+            ShowDialogMessages();
+        }
+        private MessageModel _editingMessage;
+
+        public async void EditMessageAsync(object sender)
+        {
+            if (sender is MessageModel)
+            {
+                IsEditing = true;
+
+                _editingMessage = sender as MessageModel;
+                Message = Encoding.UTF8.GetString(_editingMessage.Message);
+            }
+        }
+
+        public async void SaveMessageAsync(object sender)
+        {
+            if (_editingMessage != null)
+            {
+                AppDbContextFactory factory = new AppDbContextFactory();
+                AppDbContext context = factory.CreateDbContext(null);
+
+                MessageModel? messageFromDb = await context.dbMessages.FindAsync(_editingMessage.MessageId);
+                if (messageFromDb != null)
+                {
+                    // Обновляем текст сообщения
+                    messageFromDb.Message = Encoding.UTF8.GetBytes(Message);
+                    if (Message == string.Empty)
+                    {
+                        MessageBox.Show("Пустое сообщение не может быть отправлено!");
+                        IsEditing = false;
+                        return;
+                    }
+
+                    await context.SaveChangesAsync();
+                }
+            }
+            await ShowDialogMessages();
+            Message = String.Empty;
+        }
+
+        //public async void UpdateTextMessageAsync(object sender)
         //{
-        //    try
+        //    if (SelectedMessage != null)
         //    {
-        //        SelectedContact.Messages.Clear();
-        //        //SelectedContact.LastMessage = null;
-        //        SelectedContact.OnPropertyChanged(nameof(SelectedContact));
-        //        //SelectedContact = null;
+        //        Message = SelectedMessage.Message;
+        //        // Обновление текста сообщения
+        //        SelectedMessage.Message = newMessageText;
+
+        //        using (var context = new AppDbContext())
+        //        {
+        //            // Помечаем объект как измененный
+        //            context.Entry(selectedMessage).State = EntityState.Modified;
+
+        //            await context.SaveChangesAsync();
+        //        }
         //    }
-        //    catch(Exception e) { 
-        //        //MessageBox.Show(e.Message);
-        //    }
-        //    //OnPropertyChanged(nameof(SelectedContact));
         //}
 
 
-
     }
+
+
 
 }
