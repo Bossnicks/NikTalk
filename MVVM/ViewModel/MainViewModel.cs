@@ -11,6 +11,11 @@ using Microsoft.EntityFrameworkCore;
 using System.Text;
 using System.Collections;
 using Microsoft.Win32;
+using Microsoft.VisualBasic;
+using NAudio;
+using NAudio.Wave;
+using System.Windows.Forms;
+//using System.Windows.Forms;
 
 namespace WpfApp1.MVVM.ViewModel
 {
@@ -31,6 +36,8 @@ namespace WpfApp1.MVVM.ViewModel
         public ICommand EditCommand { get; set; }
         public ICommand SaveCommand { get; set; }
         public ICommand ShowDialogMessagesCommand { get; set; }
+        public ICommand PlayOrDownloadAudioCommand { get; set; }
+
 
         private static int authenticatedUserId = 1;
         private static ContactModel authenticatedUser = GetUserByEmailAndPasswordAsync("1@example.com", "your_password");
@@ -69,7 +76,7 @@ namespace WpfApp1.MVVM.ViewModel
             set
             {
                 _isEditing = value;
-                Application.Current.Dispatcher.Invoke(() =>
+                System.Windows.Application.Current.Dispatcher.Invoke(() =>
                 {
                     OnPropertyChanged(nameof(IsEditing));
                 });
@@ -111,8 +118,9 @@ namespace WpfApp1.MVVM.ViewModel
         public ICommand MaximizeRestoreCommand { get; set; }
         public ICommand CloseCommand { get; set; }
         public ICommand UnchooseDialogCommand { get; set; }
-
-        Window mainWindow = Application.Current.MainWindow;
+        public ICommand SendVoiceMessageCommand { get; set; }
+        //public ICommand StopRecording { get; set; }
+        Window mainWindow = System.Windows.Application.Current.MainWindow;
 
         public MainViewModel()
         {
@@ -121,12 +129,23 @@ namespace WpfApp1.MVVM.ViewModel
             //    //BeginData();
             //}
             //catch { }
+
+            try
+            {
+                //GetParentDirectory(3);
+                //AddStickersFromDirectoryAsync();
+            }
+            catch
+            {
+
+            }
             Messages = new ObservableCollection<MessageModel>();
             Contacts = new ObservableCollection<ContactModel>();
             LastMessages = new ObservableCollection<MessageModel>();
-
+            //SendVoiceMessage = new RelayCommand(StopRecording, _ => IsRecording);
             //ShowDialogMessagesCommand = new RelayCommand(ShowDialogMessages);
-
+            PlayOrDownloadAudioCommand = new RelayCommand(PlayOrDownloadAudioAsync);
+            SendVoiceMessageCommand = new RelayCommand(SendVoiceMessageAsync, _ => SelectedContact != null);
             //SendCommand = new RelayCommand(Minimize, _ => !String.IsNullOrEmpty(Message));
             DeleteCommand = new RelayCommand(DeleteMessageAsync);
             SaveCommand = new RelayCommand(SaveMessageAsync);
@@ -143,6 +162,73 @@ namespace WpfApp1.MVVM.ViewModel
             //timer.Start();
             LoadLatestMessageAsync();
             //_ = LoadLatestMessageAsync();
+        }
+
+        public static string GetParentDirectory(int levelsUp)
+        {
+            // Получаем текущую рабочую директорию
+            string currentDirectory = Directory.GetCurrentDirectory();
+
+            // Указываем количество уровней вверх, на которые мы хотим подняться
+            // например, два уровня вверх
+
+            // Поднимаемся на указанное количество уровней вверх
+            string? parentDirectory = currentDirectory;
+            for (int i = 0; i < levelsUp; i++)
+            {
+                parentDirectory = Directory.GetParent(parentDirectory)?.FullName;
+                if (parentDirectory == null)
+                {
+                    // Мы достигли корневой директории, делаем что-то по необходимости
+                    break;
+                }
+            }
+            //System.Windows.Forms.Application.DoEvents();
+            return parentDirectory;
+        }
+
+
+        public static async Task AddStickersFromDirectoryAsync()
+        {
+            var factory = new AppDbContextFactory();
+            var context = factory.CreateDbContext(null);
+            string directoryPath = MainViewModel.GetParentDirectory(3);
+            var stickersDirectory = Path.Combine(directoryPath, "Stickers");
+
+            if (!Directory.Exists(stickersDirectory))
+            {
+                System.Windows.MessageBox.Show($"Директория '{stickersDirectory}' не существует.");
+                return;
+            }
+
+            foreach (var filePath in Directory.GetFiles(stickersDirectory))
+            {
+                var sticker = new StickerModel
+                {
+                    Sticker = File.ReadAllBytes(filePath)
+                };
+
+                context.dbStickers.Add(sticker);
+            }
+
+            await context.SaveChangesAsync();
+
+
+            //var imageExtensions = new List<string> { ".png", ".jpg", ".jpeg", ".gif" };
+
+            //foreach (var filePath in Directory.GetFiles(directoryPath)
+            //    .Where(file => imageExtensions.Contains(Path.GetExtension(file)?.ToLower())))
+            //{
+            //    var sticker = new Sticker
+            //    {
+            //        Name = Path.GetFileNameWithoutExtension(filePath),
+            //        Image = File.ReadAllBytes(filePath)
+            //    };
+
+            //    context.Stickers.Add(sticker);
+            //}
+
+            //await context.SaveChangesAsync();
         }
 
 
@@ -205,7 +291,7 @@ namespace WpfApp1.MVVM.ViewModel
             {
                 if (contact != null)
                 {
-                    Application.Current.Dispatcher.Invoke(() =>
+                    System.Windows.Application.Current.Dispatcher.Invoke(() =>
                     {
 
                         message = GetLatestMessage(contact.UserId, authenticatedUserId);
@@ -216,6 +302,10 @@ namespace WpfApp1.MVVM.ViewModel
                         else if (message.TypeOfMessage == "Text")
                         {
                             contact.LastMessageView = ConvertersIn.ConvertByteArrayToString(message.Message);
+                        }
+                        else if (message.TypeOfMessage == "Audio")
+                        {
+                            contact.LastMessageView = "Audio";
                         }
                     });
                 }
@@ -261,7 +351,7 @@ namespace WpfApp1.MVVM.ViewModel
             Contacts.Clear();
             foreach (var contact in contacts)
             {
-                Application.Current.Dispatcher.Invoke(() =>
+                System.Windows.Application.Current.Dispatcher.Invoke(() =>
                 {
                     Contacts.Add(contact);
                 });
@@ -312,7 +402,7 @@ namespace WpfApp1.MVVM.ViewModel
                         Image = item.Image ?? new byte[0]
                     };
 
-                    Application.Current.Dispatcher.Invoke(() =>
+                    System.Windows.Application.Current.Dispatcher.Invoke(() =>
                     {
                         Messages.Add(messageModel);
                     });
@@ -341,7 +431,7 @@ namespace WpfApp1.MVVM.ViewModel
 
         public void Close(object sender)
         {
-            Application.Current.Shutdown();
+            System.Windows.Application.Current.Shutdown();
         }
 
 
@@ -374,7 +464,7 @@ namespace WpfApp1.MVVM.ViewModel
         {
             if (SelectedContact != null)
             {
-                var openFileDialog = new OpenFileDialog();
+                var openFileDialog = new Microsoft.Win32.OpenFileDialog();
                 openFileDialog.Filter = "Image files (*.png;*.jfif;*.jpeg;*.jpg)|*.png;*.jfif;*.jpeg;*.jpg";
 
                 if (openFileDialog.ShowDialog() == true)
@@ -464,7 +554,7 @@ namespace WpfApp1.MVVM.ViewModel
                     messageFromDb.Message = Encoding.UTF8.GetBytes(Message);
                     if (Message == string.Empty)
                     {
-                        MessageBox.Show("Пустое сообщение не может быть отправлено!");
+                        System.Windows.MessageBox.Show("Пустое сообщение не может быть отправлено!");
                         IsEditing = false;
                         return;
                     }
@@ -494,9 +584,182 @@ namespace WpfApp1.MVVM.ViewModel
         //    }
         //}
 
+        private bool _isListening = false;
+
+        public bool IsListening
+        {
+            get { return _isListening; }
+            set
+            {
+                _isListening = value;
+                System.Windows.Application.Current.Dispatcher.Invoke(() =>
+                {
+                    OnPropertyChanged(nameof(IsListening));
+                });
+                //ShowDialogMessages();
+            }
+        }
+
+        private bool _isRecording = false;
+
+        public bool IsRecording
+        {
+            get { return _isRecording; }
+            set
+            {
+                _isRecording = value;
+                System.Windows.Application.Current.Dispatcher.Invoke(() =>
+                {
+                    OnPropertyChanged(nameof(IsRecording));
+                });
+                //ShowDialogMessages();
+            }
+        }
+
+        //private DateTime audioSentAt;
+
+        private WaveInEvent waveIn;
+        private WaveFileWriter writer;
+        private MemoryStream audioStream;
+
+        private async Task RecordAudioAsync(string audioFileName)
+        {
+            waveIn = new WaveInEvent();
+
+            waveIn.DataAvailable += (s, e) =>
+            {
+                audioStream.Write(e.Buffer, 0, e.BytesRecorded);
+                writer?.Write(e.Buffer, 0, e.BytesRecorded);
+            };
+
+            waveIn.RecordingStopped += (s, e) =>
+            {
+                writer?.Dispose();
+                waveIn.Dispose();
+            };
+
+            waveIn.StartRecording();
+
+            await Task.Run(() =>
+            {
+                while (IsRecording) { }
+            });
+
+            waveIn.StopRecording();
+
+            WaveFormat waveFormat = new WaveFormat(8120, 16, 1);
+            writer = new WaveFileWriter(audioFileName, waveFormat);
+            writer.Write(audioStream.GetBuffer(), 0, (int)audioStream.Length);
+            writer.Dispose();
+        }
+
+        private async void PlayOrDownloadAudioAsync(object sender)
+        {
+            if (sender is MessageModel)
+            {
+                AppDbContextFactory factory = new AppDbContextFactory();
+                AppDbContext context = factory.CreateDbContext(null);
+                MessageModel? elem = sender as MessageModel;
+                MessageModel? messageFromDb = await context.dbMessages.FindAsync(elem?.MessageId);
+                if (messageFromDb != null)
+                {
+                    string audioFileName = $"audio_{messageFromDb.SentAt:yyyyMMdd_HHmmss}.wav";
+                    if (!File.Exists(audioFileName))
+                    {
+                        await DownloadAudioAsync(audioFileName, messageFromDb.SentAt);
+                    }
+                    await PlayAudioAsync(audioFileName);
+                }
+
+
+            }
+        }
+
+        private async Task DownloadAudioAsync(string audioFileName, DateTime audioSentAt)
+        {
+            // Получаем сообщение из базы данных
+            var factory = new AppDbContextFactory();
+            var context = factory.CreateDbContext(null);
+
+            var message = await context.dbMessages
+                .Where(m => m.SentAt == audioSentAt)
+                .FirstOrDefaultAsync();
+
+            if (message != null && message.Message != null)
+            {
+                File.WriteAllBytes(audioFileName, message.Message);
+            }
+            else
+            {
+                // Обработка случая, когда сообщение не найдено
+                // Можно выкинуть исключение, вывести сообщение и т.д.
+            }
+        }
+
+        private async Task PlayAudioAsync(string audioFileName)
+        {
+            if (File.Exists(audioFileName))
+            {
+                // Используем NAudio для воспроизведения аудио
+                using (var audioFileReader = new AudioFileReader(audioFileName))
+                using (var outputDevice = new WaveOutEvent())
+                {
+                    outputDevice.Init(audioFileReader);
+                    outputDevice.Play();
+
+                    while (outputDevice.PlaybackState == PlaybackState.Playing)
+                    {
+                        await Task.Delay(10);
+                    }
+                }
+            }
+            else
+            {
+                // Обработка случая, когда аудиофайл не найден
+                // Можно выкинуть исключение, вывести сообщение и т.д.
+            }
+        }
+
+        public async void SendVoiceMessageAsync(object sender)
+        {
+            if (IsRecording)
+            {
+                IsRecording = false;
+                return;
+            }
+
+            DateTime audioSentAt = DateTime.Now;
+
+            if (SelectedContact != null)
+            {
+                IsRecording = true;
+                string audioFileName = $"audio_{audioSentAt:yyyyMMdd_HHmmss}.wav";
+                audioStream = new MemoryStream();
+
+                await RecordAudioAsync(audioFileName);
+
+                IsRecording = false;
+
+                var factory = new AppDbContextFactory();
+                var context = factory.CreateDbContext(null);
+
+                var message = new MessageModel
+                {
+                    SenderId = authenticatedUser.UserId,
+                    ReceiverId = SelectedContact.UserId,
+                    SentAt = audioSentAt,
+                    TypeOfMessage = "Audio",
+                    Message = File.ReadAllBytes(audioFileName),
+                    IsRead = false,
+                };
+
+                context.dbMessages.Add(message);
+                await context.SaveChangesAsync();
+            }
+        }
+
+
 
     }
-
-
-
 }
+

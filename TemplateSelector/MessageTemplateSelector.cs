@@ -8,6 +8,7 @@ namespace WpfApp1.TemplateSelector
     {
         public DataTemplate TextTemplate { get; set; }
         public DataTemplate ImageTemplate { get; set; }
+        public DataTemplate AudioTemplate { get; set; }
 
         public override DataTemplate SelectTemplate(object item, DependencyObject container)
         {
@@ -21,6 +22,11 @@ namespace WpfApp1.TemplateSelector
                 {
                     return ImageTemplate;
                 }
+                else if (message.TypeOfMessage == "Audio" && AudioTemplate != null)
+                {
+                    return AudioTemplate;
+                }
+
             }
 
             // If no suitable template is found, return a default template or null
