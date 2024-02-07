@@ -13,6 +13,7 @@
     <Window.DataContext>
         <viewmodel:MainViewModel />
     </Window.DataContext>
+
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="25"/>
@@ -140,6 +141,7 @@
             </Border>
 
             <ListView ItemsSource="{Binding Messages}"
+                      SelectedItem="{Binding SelectedMessage}"
                       Background="Transparent"
                       BorderThickness="0"
                       ItemContainerStyle="{StaticResource ChatItem}"
@@ -161,17 +163,57 @@
                             HorizontalAlignment="Right"
                             Grid.Column="1"
                             Margin="0,4,16,4">
-                    <Button Style="{StaticResource ButtonStyle}" HorizontalAlignment="Center" VerticalAlignment="Center" Width="33" Height="33" Background="Transparent" BorderThickness="0">
+                    <Button HorizontalAlignment="Center" VerticalAlignment="Center" Width="33" Height="33" Background="Transparent" BorderThickness="0" Command="{Binding SendVoiceMessageCommand}">
                         <Image Width="30" Height="30" Source="./Icons/microphone.png" RenderOptions.BitmapScalingMode="Fant"/>
+                        <Button.Style>
+                            <Style TargetType="Button" BasedOn="{StaticResource ButtonStyle}">
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding IsRecording, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Value="True">
+                                        <Setter Property="Background" Value="Red" />
+                                    </DataTrigger>
+                                    <DataTrigger Binding="{Binding IsRecording, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Value="False">
+                                        <Setter Property="Background" Value="Transparent" />
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
                     </Button>
                     <Button Style="{StaticResource ButtonStyle}" HorizontalAlignment="Center" VerticalAlignment="Center" Width="33" Height="33" Background="Transparent" BorderThickness="0" Margin="3,0,5,0">
                         <Image Width="30" Height="30" Source="./Icons/smile.png" RenderOptions.BitmapScalingMode="Fant"/>
                     </Button>
-                    <Button Style="{StaticResource ButtonStyle}" HorizontalAlignment="Center" VerticalAlignment="Center" Width="33" Height="33" Background="Transparent" BorderThickness="0" Margin="0,0,3,0">
+                    <Button Style="{StaticResource ButtonStyle}" IsEnabled="{Binding SendPictureCommand.CanExecute}" Command="{Binding SendPictureCommand}"  HorizontalAlignment="Center" VerticalAlignment="Center" Width="33" Height="33" Background="Transparent" BorderThickness="0" Margin="0,0,3,0">
                         <Image Width="30" Height="30" Source="./Icons/plus.png" RenderOptions.BitmapScalingMode="Fant"/>
                     </Button>
-                    <Button Style="{StaticResource ButtonStyle}" HorizontalAlignment="Center" VerticalAlignment="Center" Width="33" Height="33" Background="Transparent" BorderThickness="0">
+                    <Button x:Name="SendButton"  HorizontalAlignment="Center" VerticalAlignment="Center" Width="33" Height="33" Background="Transparent" BorderThickness="0" Margin="0,0,3,0" Command="{Binding SendCommand}">
                         <Image Width="30" Height="30" Source="./Icons/send.png" RenderOptions.BitmapScalingMode="Fant"/>
+                        <Button.Style>
+                            <Style TargetType="Button" BasedOn="{StaticResource ButtonStyle}">
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding IsEditing, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Value="True">
+                                        <Setter Property="Visibility" Value="Collapsed" />
+                                    </DataTrigger>
+                                    <DataTrigger Binding="{Binding IsEditing, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Value="False">
+                                        <Setter Property="Visibility" Value="Visible" />
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
+                    </Button>
+
+                    <Button x:Name="UpdateButton"  HorizontalAlignment="Center" VerticalAlignment="Center" Width="33" Height="33" Background="Transparent" BorderThickness="0" Margin="0,0,3,0" Command="{Binding SaveCommand}">
+                        <Image Width="30" Height="30" Source="./Icons/update.png" RenderOptions.BitmapScalingMode="Fant"/>
+                        <Button.Style>
+                            <Style TargetType="Button" BasedOn="{StaticResource ButtonStyle}">
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding IsEditing, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Value="True">
+                                        <Setter Property="Visibility" Value="Visible" />
+                                    </DataTrigger>
+                                    <DataTrigger Binding="{Binding IsEditing, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Value="False">
+                                        <Setter Property="Visibility" Value="Collapsed" />
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
                     </Button>
                 </StackPanel>
 

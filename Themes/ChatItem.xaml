@@ -7,25 +7,77 @@
     <conv:StringToBytesConverter x:Key="StringToBytesConverter" />
     <conv:ByteArrayToImageSourceConverter x:Key="ByteArrayToImageSourceConverter" />
     <DataTemplate x:Key="ImageTemplate">
-        <Image Width="auto" MaxWidth="300" Source="{Binding Message, Converter={StaticResource ByteArrayToImageSourceConverter}}"/>
+        <Image Width="auto" MaxWidth="300" Margin="10,0,0,0" Source="{Binding Message, Converter={StaticResource ByteArrayToImageSourceConverter}}"/>
     </DataTemplate>
-
     <DataTemplate x:Key="TextTemplate">
         <Label Width="auto" MaxWidth="200" Height="35" Margin="0,-5,0,0" FontSize="15" HorizontalAlignment="Left" Content="{Binding Message, Converter={StaticResource StringToBytesConverter}}" />
     </DataTemplate>
+    <DataTemplate x:Key="AudioTemplate">
+        <StackPanel Orientation="Horizontal">
+            <Button  
+               FontFamily="Century Gothic"
+               Foreground="Transparent"
+               Background="Transparent"
+               BorderThickness="0"
+               Width="40"
+               Height="40"
+               Margin="10"
+               Command="{Binding DataContext.PlayOrDownloadAudioCommand, RelativeSource={RelativeSource AncestorType={x:Type ListView}}}" CommandParameter="{Binding}"
+               >
+
+                <Button.Resources>
+                    <Style TargetType="{x:Type Border}">
+                        <Setter Property="CornerRadius" Value="20"/>
+                    </Style>
+                </Button.Resources>
+
+                <ContentControl>
+                    <ContentControl.Content>
+                        <Image Source="../Icons/play.png"/>
+                    </ContentControl.Content>
+                </ContentControl>
+            </Button>
+
+
+            <StackPanel Orientation="Vertical">
+                <Label Width="auto" Height="30" FontSize="15" Margin="0,5,0,0" HorizontalAlignment="Left" VerticalAlignment="Center" Content="Audio" />
+                <Label Width="auto" Height="30" FontSize="15" Margin="0,-10,0,0" HorizontalAlignment="Left" VerticalAlignment="Center" Content="{Binding SentAt}" />
+            </StackPanel>
+        </StackPanel>
+    </DataTemplate>
+    <DataTemplate x:Key="ImageTemplateUP">
+        <Button Style="{StaticResource ButtonStyle}" Command="{Binding DataContext.DeleteCommand, RelativeSource={RelativeSource AncestorType={x:Type ListView}}}" CommandParameter="{Binding}" HorizontalAlignment="Center" VerticalAlignment="Center" Width="27" Height="27" Background="Transparent" BorderThickness="0">
+            <Image Width="16" Height="16" Source="../Icons/cancel.png" RenderOptions.BitmapScalingMode="Fant"/>
+        </Button>
+    </DataTemplate>
+    <DataTemplate x:Key="TextTemplateUP">
+        <StackPanel Orientation="Horizontal">
+            <Button Style="{StaticResource ButtonStyle}" Command="{Binding DataContext.EditCommand, RelativeSource={RelativeSource AncestorType={x:Type ListView}}}" CommandParameter="{Binding}" HorizontalAlignment="Center" VerticalAlignment="Center" Width="27" Height="27" Background="Transparent" BorderThickness="0">
+                <Image Width="24" Height="24" Source="../Icons/edit.png" RenderOptions.BitmapScalingMode="Fant"/>
+            </Button>
+            <Button Style="{StaticResource ButtonStyle}" Command="{Binding DataContext.DeleteCommand, RelativeSource={RelativeSource AncestorType={x:Type ListView}}}" CommandParameter="{Binding}" HorizontalAlignment="Center" VerticalAlignment="Center" Width="27" Height="27" Background="Transparent" BorderThickness="0">
+                <Image Width="16" Height="16" Source="../Icons/cancel.png" RenderOptions.BitmapScalingMode="Fant"/>
+            </Button>
+        </StackPanel>
+    </DataTemplate>
+
     <temp:MessageTemplateSelector x:Key="MessageTemplateSelector"
                                        ImageTemplate="{StaticResource ImageTemplate}"
-                                       TextTemplate="{StaticResource TextTemplate}"/>
-    
-    
-    
-    
+                                       TextTemplate="{StaticResource TextTemplate}"
+                                       AudioTemplate="{StaticResource AudioTemplate}"/>
+    <temp:DeleteUpdateTemplateSelector x:Key="DeleteUpdateTemplateSelector"
+                                       ImageTemplateUP="{StaticResource ImageTemplateUP}"
+                                       TextTemplateUP="{StaticResource TextTemplateUP}"/>
+
+
+
+
     <Style TargetType="ListViewItem" x:Key="ChatItem">
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="ListViewItem">
-                    <StackPanel Orientation="Horizontal">
-                        <Ellipse Width="40" Height="40" Margin="10,0,0,0" VerticalAlignment="Top">
+                    <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
+                        <Ellipse Width="40" Height="40" Margin="10,7,0,0" VerticalAlignment="Top">
                             <Ellipse.Fill>
                                 <ImageBrush ImageSource="{Binding Image}" RenderOptions.BitmapScalingMode="Fant"/>
                             </Ellipse.Fill>
@@ -47,12 +99,14 @@
                                        FontSize="11"
                                        Margin="0,1,0,0"
                                        VerticalAlignment="Center"/>
+                                <ContentControl Content="{Binding}"
+                                            ContentTemplateSelector="{StaticResource DeleteUpdateTemplateSelector}"/>
                             </StackPanel>
                             <ContentControl Content="{Binding}"
                                             ContentTemplateSelector="{StaticResource MessageTemplateSelector}"/>
                         </StackPanel>
 
-                            <!-- Use DataTemplateSelector to conditionally show either an Image or Text -->
+                        <!-- Use DataTemplateSelector to conditionally show either an Image or Text -->
 
                     </StackPanel>
                 </ControlTemplate>

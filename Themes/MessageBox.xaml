@@ -25,12 +25,15 @@
                                      Margin="8,0,0,0"
                                      Text="{Binding Message, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
                                 <TextBox.InputBindings>
-                                    <KeyBinding Command="{Binding SendCommand}" Key="Return"/>
+                                    <KeyBinding Key="Return" Command="{Binding SendCommand}"/>
                                 </TextBox.InputBindings>
                                 <TextBox.Style>
                                     <Style TargetType="{x:Type TextBox}">
                                         <Style.Triggers>
                                             <DataTrigger Binding="{Binding SelectedContact}" Value="{x:Null}">
+                                                <Setter Property="IsEnabled" Value="False"/>
+                                            </DataTrigger>
+                                            <DataTrigger Binding="{Binding SendCommand.CanExecute}" Value="False">
                                                 <Setter Property="IsEnabled" Value="False"/>
                                             </DataTrigger>
                                         </Style.Triggers>

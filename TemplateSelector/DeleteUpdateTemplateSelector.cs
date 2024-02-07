@@ -17,7 +17,7 @@ namespace WpfApp1.TemplateSelector
                 {
                     return TextTemplateUP;
                 }
-                else if (message.TypeOfMessage == "Image" && ImageTemplateUP != null)
+                else if ((message.TypeOfMessage == "Image" || message.TypeOfMessage == "Audio") && ImageTemplateUP != null)
                 {
                     return ImageTemplateUP;
                 }
