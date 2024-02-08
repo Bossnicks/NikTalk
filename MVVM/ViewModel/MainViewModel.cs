@@ -22,6 +22,7 @@ namespace WpfApp1.MVVM.ViewModel
     internal class MainViewModel : ObservableObject
     {
         //public ObservableCollection<MessageModel> Messages { get; set; }
+        public ObservableCollection<StickerModel> Stickers { get; set; }
         public ObservableCollection<ContactModel> Contacts { get; set; }
         public ObservableCollection<MessageModel> LastMessages { get; set; }
         public ObservableCollection<MessageModel> Messages { get; set; }
@@ -64,6 +65,18 @@ namespace WpfApp1.MVVM.ViewModel
             {
                 _selectedMessage = value;
                 OnPropertyChanged("SelectedMessage");
+                //ShowDialogMessages();
+            }
+        }
+
+        private StickerModel _selectedSticker;
+        public StickerModel SelectedSticker
+        {
+            get { return _selectedSticker; }
+            set
+            {
+                _selectedSticker = value;
+                OnPropertyChanged("SelectedSticker");
                 //ShowDialogMessages();
             }
         }
@@ -119,6 +132,7 @@ namespace WpfApp1.MVVM.ViewModel
         public ICommand CloseCommand { get; set; }
         public ICommand UnchooseDialogCommand { get; set; }
         public ICommand SendVoiceMessageCommand { get; set; }
+        public ICommand SendStickerCommand { get; set; }
         //public ICommand StopRecording { get; set; }
         Window mainWindow = System.Windows.Application.Current.MainWindow;
 
@@ -139,11 +153,14 @@ namespace WpfApp1.MVVM.ViewModel
             {
 
             }
+            Stickers = new ObservableCollection<StickerModel>();
+
             Messages = new ObservableCollection<MessageModel>();
             Contacts = new ObservableCollection<ContactModel>();
             LastMessages = new ObservableCollection<MessageModel>();
             //SendVoiceMessage = new RelayCommand(StopRecording, _ => IsRecording);
             //ShowDialogMessagesCommand = new RelayCommand(ShowDialogMessages);
+            SendStickerCommand = new RelayCommand(SendStickerAsync, _ => SelectedContact != null);
             PlayOrDownloadAudioCommand = new RelayCommand(PlayOrDownloadAudioAsync);
             SendVoiceMessageCommand = new RelayCommand(SendVoiceMessageAsync, _ => SelectedContact != null);
             //SendCommand = new RelayCommand(Minimize, _ => !String.IsNullOrEmpty(Message));
@@ -156,6 +173,7 @@ namespace WpfApp1.MVVM.ViewModel
             MaximizeRestoreCommand = new RelayCommand(MaximizeRestore);
             CloseCommand = new RelayCommand(Close);
             LoadUsersWithDialogs(authenticatedUserId);
+            LoadStickersAsync();
             //timer = new System.Windows.Threading.DispatcherTimer();
             //timer.Interval = TimeSpan.FromSeconds(1); // Интервал в 3 секунды (можете изменить по необходимости)
             //timer.Tick += async (sender, e) => await LoadLatestMessageAsync();
@@ -307,6 +325,10 @@ namespace WpfApp1.MVVM.ViewModel
                         {
                             contact.LastMessageView = "Audio";
                         }
+                        else if (message.TypeOfMessage == "Sticker")
+                        {
+                            contact.LastMessageView = "Sticker";
+                        }
                     });
                 }
             }
@@ -356,6 +378,26 @@ namespace WpfApp1.MVVM.ViewModel
                     Contacts.Add(contact);
                 });
             }
+        }
+
+
+        public async void LoadStickersAsync()
+        {
+            Stickers.Clear(); // Очистите коллекцию перед загрузкой
+            var factory = new AppDbContextFactory();
+            using (var context = factory.CreateDbContext(null)) // Замените AppDbContext на ваш контекст базы данных
+            {
+                var stickersFromDb = await context.dbStickers.ToListAsync();
+
+                foreach (var sticker in stickersFromDb)
+                {
+                    System.Windows.Application.Current.Dispatcher.Invoke(() =>
+                    {
+                        Stickers.Add(sticker);
+                    });
+                }
+            }
+
         }
 
 
@@ -565,6 +607,38 @@ namespace WpfApp1.MVVM.ViewModel
             await ShowDialogMessages();
             Message = String.Empty;
         }
+
+        public async void SendStickerAsync(object sender)
+        {
+            if (sender is StickerModel)
+            {
+                AppDbContextFactory factory = new AppDbContextFactory();
+                AppDbContext context = factory.CreateDbContext(null);
+                StickerModel? elem = sender as StickerModel;
+                StickerModel? stickerFromDb = await context.dbStickers.FindAsync(elem?.StickerId);
+
+                if (stickerFromDb != null)
+                {
+                    // Создаем новое сообщение на основе данных стикера
+                    MessageModel newMessage = new MessageModel
+                    {
+                        SenderId = authenticatedUser.UserId,
+                        ReceiverId = SelectedContact.UserId,
+                        SentAt = DateTime.Now,
+                        TypeOfMessage = "Sticker",
+                        Message = stickerFromDb.Sticker, // Предполагается, что у стикера есть свойство Sticker, содержащее изображение
+                        IsRead = false
+                    };
+
+                    // Добавляем новое сообщение в контекст базы данных
+                    context.dbMessages.Add(newMessage);
+
+                    // Сохраняем изменения
+                    await context.SaveChangesAsync();
+                }
+            }
+        }
+
 
         //public async void UpdateTextMessageAsync(object sender)
         //{
