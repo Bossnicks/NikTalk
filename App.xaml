@@ -6,6 +6,7 @@
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="./Themes/StickerCard.xaml"/>
                 <ResourceDictionary Source="./Themes/ButtonStyles.xaml"/>
                 <ResourceDictionary Source="./Themes/ContactCard.xaml"/>
                 <ResourceDictionary Source="./Themes/MessageBox.xaml"/>

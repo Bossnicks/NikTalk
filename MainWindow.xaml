@@ -22,10 +22,13 @@
 
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="200"/>
-            <ColumnDefinition/>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="200"/>
         </Grid.ColumnDefinitions>
 
-        <Border Grid.ColumnSpan="2"
+
+
+        <Border Grid.ColumnSpan="3"
                 Background="#252525"
                 MouseDown="Border_MouseDown">
             <Grid HorizontalAlignment="Stretch">
@@ -79,29 +82,33 @@
                       BorderThickness="0"
                       Grid.Row="1"
                       ItemContainerStyle="{StaticResource ContactCard}"/>
-            <StackPanel Grid.Row="2"
-                        Orientation="Horizontal"
-                        Background="#292B2F">
-
-                <Border CornerRadius="25"
-                        Width="30" Height="30"
-                        Background="#3bff6f"
-                        Margin="18,0,0,0"/>
-
-                <StackPanel VerticalAlignment="Center">
-                    <Label Content="Username"
+            <Button Grid.Row="2" Command="{Binding StartEditProfile}">
+                <Button.Template>
+                    <ControlTemplate TargetType="Button">
+                        <StackPanel Orientation="Horizontal" Background="#292B2F">
+                            <Border CornerRadius="25" Width="30" Height="30" Margin="18,0,0,0">
+                                <Ellipse>
+                                    <Ellipse.Fill>
+                                        <ImageBrush ImageSource="{Binding AuthenticatedUser.Image}"/>
+                                    </Ellipse.Fill>
+                                </Ellipse>
+                            </Border>
+                            <StackPanel VerticalAlignment="Center">
+                                <Label Content="{Binding AuthenticatedUser.UserName}"
                            Foreground="White"
                            FontWeight="SemiBold"
                            Margin="0,-5,0,-5"/>
-                    <Label Content="Custom Status"
+                                <!--<Label Content="Custom Status"
                            Foreground="White"
                            FontWeight="SemiBold"
                            FontSize="10"
-                           Margin="0,-8,0,-5"/>
+                           Margin="0,-8,0,-5"/>-->
+                            </StackPanel>
+                        </StackPanel>
+                    </ControlTemplate>
+                </Button.Template>
+            </Button>
 
-                </StackPanel>
-
-            </StackPanel>
         </Grid>
 
         <Grid Grid.Column="1"
@@ -178,9 +185,6 @@
                             </Style>
                         </Button.Style>
                     </Button>
-                    <Button Style="{StaticResource ButtonStyle}" HorizontalAlignment="Center" VerticalAlignment="Center" Width="33" Height="33" Background="Transparent" BorderThickness="0" Margin="3,0,5,0">
-                        <Image Width="30" Height="30" Source="./Icons/smile.png" RenderOptions.BitmapScalingMode="Fant"/>
-                    </Button>
                     <Button Style="{StaticResource ButtonStyle}" IsEnabled="{Binding SendPictureCommand.CanExecute}" Command="{Binding SendPictureCommand}"  HorizontalAlignment="Center" VerticalAlignment="Center" Width="33" Height="33" Background="Transparent" BorderThickness="0" Margin="0,0,3,0">
                         <Image Width="30" Height="30" Source="./Icons/plus.png" RenderOptions.BitmapScalingMode="Fant"/>
                     </Button>
@@ -219,6 +223,39 @@
 
             </Grid>
         </Grid>
+        <Grid Background="#2f3136"
+            Grid.Row="2" Grid.Column="3">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
 
+            <Label Content="Stickers"
+                 VerticalAlignment="Center"
+                 FontWeight="Medium"
+                 Foreground="Gray"
+                 Margin="8,0,0,0"/>
+            <ListView ItemsSource="{Binding Stickers}"
+                  SelectedItem="{Binding SelectedSticker}"
+                  Background="Transparent"
+                  BorderThickness="0"
+                  Grid.Row="1"
+                  Width="200"
+                  ScrollViewer.VerticalScrollBarVisibility="Hidden">
+                <ListView.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <UniformGrid Columns="2" />
+                    </ItemsPanelTemplate>
+                </ListView.ItemsPanel>
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <Button Margin="8" Padding="0" Width="75" Height="75" Style="{StaticResource ButtonStyle}"
+                                Command="{Binding DataContext.SendStickerCommand, RelativeSource={RelativeSource AncestorType={x:Type ListView}}}" CommandParameter="{Binding}">
+                            <Image Width="75" Height="75" Source="{Binding Sticker}"/>
+                        </Button>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </Grid>
     </Grid>
 </Window>

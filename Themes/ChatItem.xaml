@@ -6,6 +6,9 @@
                     >
     <conv:StringToBytesConverter x:Key="StringToBytesConverter" />
     <conv:ByteArrayToImageSourceConverter x:Key="ByteArrayToImageSourceConverter" />
+    <DataTemplate x:Key="StickerTemplate">
+        <Image Width="auto" MaxWidth="100" Margin="10,20,0,0" Source="{Binding Message, Converter={StaticResource ByteArrayToImageSourceConverter}}"/>
+    </DataTemplate>
     <DataTemplate x:Key="ImageTemplate">
         <Image Width="auto" MaxWidth="300" Margin="10,0,0,0" Source="{Binding Message, Converter={StaticResource ByteArrayToImageSourceConverter}}"/>
     </DataTemplate>
@@ -64,7 +67,8 @@
     <temp:MessageTemplateSelector x:Key="MessageTemplateSelector"
                                        ImageTemplate="{StaticResource ImageTemplate}"
                                        TextTemplate="{StaticResource TextTemplate}"
-                                       AudioTemplate="{StaticResource AudioTemplate}"/>
+                                       AudioTemplate="{StaticResource AudioTemplate}"
+                                       StickerTemplate="{StaticResource StickerTemplate}"/>
     <temp:DeleteUpdateTemplateSelector x:Key="DeleteUpdateTemplateSelector"
                                        ImageTemplateUP="{StaticResource ImageTemplateUP}"
                                        TextTemplateUP="{StaticResource TextTemplateUP}"/>

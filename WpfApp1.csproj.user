@@ -22,6 +22,9 @@
     <Page Update="Themes\MessageBox.xaml">
       <SubType>Designer</SubType>
     </Page>
+    <Page Update="Themes\StickerCard.xaml">
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="Themes\TextBoxMessage.xaml">
       <SubType>Designer</SubType>
     </Page>
