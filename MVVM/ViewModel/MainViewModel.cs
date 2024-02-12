@@ -38,6 +38,7 @@ namespace WpfApp1.MVVM.ViewModel
         public ICommand SaveCommand { get; set; }
         public ICommand ShowDialogMessagesCommand { get; set; }
         public ICommand PlayOrDownloadAudioCommand { get; set; }
+        public ICommand StartEditProfile { get; set; }
 
 
         private static int authenticatedUserId = 1;
@@ -133,6 +134,7 @@ namespace WpfApp1.MVVM.ViewModel
         public ICommand UnchooseDialogCommand { get; set; }
         public ICommand SendVoiceMessageCommand { get; set; }
         public ICommand SendStickerCommand { get; set; }
+        public ICommand StartEditProfileCommand { get; set; }
         //public ICommand StopRecording { get; set; }
         Window mainWindow = System.Windows.Application.Current.MainWindow;
 
@@ -160,6 +162,7 @@ namespace WpfApp1.MVVM.ViewModel
             LastMessages = new ObservableCollection<MessageModel>();
             //SendVoiceMessage = new RelayCommand(StopRecording, _ => IsRecording);
             //ShowDialogMessagesCommand = new RelayCommand(ShowDialogMessages);
+            //StartEditProfileCommand = new RelayCommand(StartEditProfile);
             SendStickerCommand = new RelayCommand(SendStickerAsync, _ => SelectedContact != null);
             PlayOrDownloadAudioCommand = new RelayCommand(PlayOrDownloadAudioAsync);
             SendVoiceMessageCommand = new RelayCommand(SendVoiceMessageAsync, _ => SelectedContact != null);

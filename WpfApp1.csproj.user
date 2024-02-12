@@ -10,6 +10,18 @@
     <Page Update="MainWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
+    <Page Update="MVVM\View\Authorization.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="MVVM\View\LoginView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="MVVM\View\Profile.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="MVVM\View\RegisterView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="Themes\ButtonStyles.xaml">
       <SubType>Designer</SubType>
     </Page>

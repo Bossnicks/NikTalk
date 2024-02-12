@@ -136,3 +136,11 @@ C:\Users\HP\Флешка\Рабочий стол\Reserve++\all_versions\Верс
 C:\Users\HP\Флешка\Рабочий стол\Reserve++\all_versions\Версия_9\WpfApp1\bin\Debug\net8.0-windows\NAudio.WinMM.dll
 C:\Users\HP\Флешка\Рабочий стол\Reserve++\all_versions\Версия_9\WpfApp1\obj\Debug\net8.0-windows\WpfApp1.sourcelink.json
 C:\Users\HP\Флешка\Рабочий стол\Reserve++\all_versions\Версия_9\WpfApp1\obj\Debug\net8.0-windows\Themes\StickerCard.baml
+C:\Users\HP\Флешка\Рабочий стол\Reserve++\all_versions\Версия_9\WpfApp1\obj\Debug\net8.0-windows\MVVM\View\Authorization.g.cs
+C:\Users\HP\Флешка\Рабочий стол\Reserve++\all_versions\Версия_9\WpfApp1\obj\Debug\net8.0-windows\MVVM\View\LoginView.g.cs
+C:\Users\HP\Флешка\Рабочий стол\Reserve++\all_versions\Версия_9\WpfApp1\obj\Debug\net8.0-windows\MVVM\View\Profile.g.cs
+C:\Users\HP\Флешка\Рабочий стол\Reserve++\all_versions\Версия_9\WpfApp1\obj\Debug\net8.0-windows\MVVM\View\RegisterView.g.cs
+C:\Users\HP\Флешка\Рабочий стол\Reserve++\all_versions\Версия_9\WpfApp1\obj\Debug\net8.0-windows\MVVM\View\Authorization.baml
+C:\Users\HP\Флешка\Рабочий стол\Reserve++\all_versions\Версия_9\WpfApp1\obj\Debug\net8.0-windows\MVVM\View\LoginView.baml
+C:\Users\HP\Флешка\Рабочий стол\Reserve++\all_versions\Версия_9\WpfApp1\obj\Debug\net8.0-windows\MVVM\View\Profile.baml
+C:\Users\HP\Флешка\Рабочий стол\Reserve++\all_versions\Версия_9\WpfApp1\obj\Debug\net8.0-windows\MVVM\View\RegisterView.baml

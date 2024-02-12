@@ -1,0 +1,19 @@
+﻿<Window x:Class="WpfApp1.MVVM.View.Profile"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfApp1"
+        xmlns:viewmodel="clr-namespace:WpfApp1.MVVM.ViewModel" d:DataContext="{d:DesignInstance Type=viewmodel:MainViewModel}"
+        mc:Ignorable="d"
+        Title="Profile Edit" Height="300" Width="400">
+
+    <Grid>
+        <!-- UI для редактирования профиля, например, TextBox для имени, Email и т.д. -->
+        <TextBox Text="{Binding AuthenticatedUser.UserName}" />
+        <TextBox Text="{Binding AuthenticatedUser.Email}" />
+
+        <!-- Кнопка сохранения изменений -->
+        <Button Content="Save Changes" Command="{Binding SaveChangesCommand}" />
+    </Grid>
+</Window>

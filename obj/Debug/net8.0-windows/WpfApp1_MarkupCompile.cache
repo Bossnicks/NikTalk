@@ -10,11 +10,11 @@ none
 false
 TRACE;DEBUG;NET;NET8_0;NETCOREAPP
 C:\Users\HP\Флешка\Рабочий стол\Reserve++\all_versions\Версия_9\WpfApp1\App.xaml
-7-1046635731
+11-1047325887
 
-15-1877539603
+201945077738
 227413630667
-MainWindow.xaml;Themes\ButtonStyles.xaml;Themes\ChatItem.xaml;Themes\ContactCard.xaml;Themes\MessageBox.xaml;Themes\StickerCard.xaml;Themes\TextBoxMessage.xaml;
+MainWindow.xaml;MVVM\View\Authorization.xaml;MVVM\View\LoginView.xaml;MVVM\View\Profile.xaml;MVVM\View\RegisterView.xaml;Themes\ButtonStyles.xaml;Themes\ChatItem.xaml;Themes\ContactCard.xaml;Themes\MessageBox.xaml;Themes\StickerCard.xaml;Themes\TextBoxMessage.xaml;
 
 False
 

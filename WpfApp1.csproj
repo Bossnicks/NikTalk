@@ -26,6 +26,10 @@
 		<Resource Include="Icons/send.png" />
 		<Resource Include="Icons/plus.png" />
 		<Resource Include="Icons/smile.png" />
+		<Resource Include="Icons/edit.png" />
+		<Resource Include="Icons/cancel.png" />
+		<Resource Include="Icons/update.png" />
+		<Resource Include="Icons/play.png" />
 
 
 
