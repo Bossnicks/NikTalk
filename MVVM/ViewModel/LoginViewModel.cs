@@ -11,13 +11,17 @@ using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Forms;
 using System.Windows.Input;
 using System.Windows.Navigation;
 using WpfApp1.Core;
 using WpfApp1.MVVM.Model;
+using System.IO;
 using WpfApp1.MVVM.View;
+using WpfApp1.MVVM.Trackers;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.ListView;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
+using MessageBox = System.Windows.MessageBox;
 
 namespace WpfApp1.MVVM.ViewModel
 {
@@ -26,6 +30,14 @@ namespace WpfApp1.MVVM.ViewModel
         Window mainWindow = System.Windows.Application.Current.MainWindow;
 
 
+        public event EventHandler<UserUpdatedEventArgs> UserUpdated;
+
+        // ... остальной код ...
+
+        private void OnUserUpdated(bool success)
+        {
+            UserUpdated?.Invoke(this, new UserUpdatedEventArgs(success));
+        }
 
         //public System.Windows.Controls.UserControl CurrentView
         //{
@@ -40,7 +52,7 @@ namespace WpfApp1.MVVM.ViewModel
 
         public Frame MainFrame { get; set; }
         public ICommand MinimizeCommand { get; private set; }
-        public ICommand MaximizeRestoreCommand {  get; private set; }
+        public ICommand MaximizeRestoreCommand { get; private set; }
         public ICommand CloseCommand { get; private set; }
         public ICommand ShowAuthorizeCommand { get; private set; }
         private RelayCommand loginCommand;
@@ -68,6 +80,39 @@ namespace WpfApp1.MVVM.ViewModel
             }
         }
 
+        private string _name = "your_name";
+        public string Name
+        {
+            get { return _name; }
+            set
+            {
+                _name = value;
+                OnPropertyChanged("Name");
+            }
+        }
+
+        private byte[] _image;
+        public byte[] Image
+        {
+            get { return _image; }
+            set
+            {
+                _image = value;
+                OnPropertyChanged("Image");
+            }
+        }
+        private static ContactModel curUser;
+        public static ContactModel CurUser
+        {
+            get
+            {
+                return curUser;
+            }
+            set
+            {
+                curUser = value;
+            }
+        }
 
         private string _error;
         public string Error
@@ -80,23 +125,21 @@ namespace WpfApp1.MVVM.ViewModel
             }
         }
 
-        private UserControl _currentView;
+        //private UserControl _currentView;
 
-        public UserControl CurrentView
+        //public UserControl CurrentView
+        //{
+        //    get { return _currentView; }
+        //    set
+        //    {
+        //        _currentView = value;
+        //        OnPropertyChanged(nameof(CurrentView));
+        //    }
+        //}
+
+        public ICommand ChooseAvatarCommand { get; set; }
+        public LoginViewModel()
         {
-            get { return _currentView; }
-            set
-            {
-                _currentView = value;
-                OnPropertyChanged(nameof(CurrentView));
-            }
-        }
-        NavigationWindow win = new NavigationWindow();
-        //public ICommand ShowLoginPageCommand { get; private set; }
-        //public ICommand ShowRegisterPageCommand { get; private set; }
-
-
-        public LoginViewModel() {
 
             CloseCommand = new RelayCommand(Close);
             MinimizeCommand = new RelayCommand(Minimize);
@@ -104,38 +147,70 @@ namespace WpfApp1.MVVM.ViewModel
             //CurrentView = new LoginView();
             //ShowLoginPageCommand = new RelayCommand(ShowLoginPage);
             //ShowRegisterPageCommand = new RelayCommand(ShowRegisterPage);
-            ShowRegisterPageCommand = new RelayCommand(ShowRegisterPage);
-            ShowLoginPageCommand = new RelayCommand(ShowLoginPage);
-        }
+            ChooseAvatarCommand = new RelayCommand(ChooseAvatar);
+            //ShowLoginPageCommand = new RelayCommand(ToLogin, _ => true);
+            //ShowRegisterPageCommand = new RelayCommand(ToRegister, _=> true);
 
-        private void ShowLoginPage(object parameter)
+        }
+        public ICommand UpdateUserCommand { get; set; }
+        public LoginViewModel(ContactModel contact)
         {
-            win.Content = new LoginView();
+            CurUser = contact;
+            Email = CurUser.Email;
+            Password = CurUser.Password;
+            Image = CurUser.Image ?? new byte[0];
+            Name = CurUser.UserName;
+
+            ChooseAvatarCommand = new RelayCommand(ChooseAvatar);
+            UpdateUserCommand = new RelayCommand(UpdateUser);
         }
 
-        private void ShowRegisterPage(object parameter)
+        public void ToLogin(object sender)
         {
-            win.Content = new RegisterView();
+            LoginWindow vie = new LoginWindow();
+            vie.Show();
+            var cur = System.Windows.Application.Current.MainWindow;
+            System.Windows.Application.Current.MainWindow = vie;
+            cur.Close();
         }
 
-        //public void ShowLoginView()
-        //{
-        //    CurrentView = new LoginView();
-        //}
+        public void ToRegister(object sender)
+        {
+            RegisterView vie = new RegisterView();
+            vie.Show();
+            var cur = System.Windows.Application.Current.MainWindow;
+            System.Windows.Application.Current.MainWindow = vie;
+            cur.Close();
+        }
 
-        //public void ShowRegisterView()
-        //{
-        //    CurrentView = new RegisterView();
-        //}
-        //public void ShowLoginView(object sender)
-        //{
-        //    MainFrame.Navigate(new LoginView());
-        //}
 
-        //public void ShowRegisterView(object sender)
-        //{
-        //    MainFrame.Navigate(new RegisterView());
-        //}
+        public void UpdateUser(object sender)
+        {
+            var factory = new AppDbContextFactory();
+            var context = factory.CreateDbContext(null);
+            var existingContact = context.dbContacts.FirstOrDefault(c => c.UserId == CurUser.UserId);
+            if (existingContact != null)
+            {
+                // Обновляем свойства пользователя
+                existingContact.Email = Email;
+                existingContact.UserName = Name;
+                existingContact.Password = Password;
+                existingContact.Image = File.ReadAllBytes(AvatarImagePath);
+
+                // Другие свойства, которые вы хотите обновить
+
+                context.SaveChanges(); // Сохраняем изменения в базе данных
+
+                OnUserUpdated(true);
+            }
+            else
+            {
+                OnUserUpdated(false);
+            }
+
+        }
+
+
 
         public void Minimize(object sender)
         {
@@ -183,6 +258,43 @@ namespace WpfApp1.MVVM.ViewModel
             }
         }
 
+        private static string _avatarImagePath; // Переменная для хранения пути к выбранному аватару
+
+
+
+        // Инициализация команд
+
+
+
+
+        public string AvatarImagePath
+        {
+            get { return _avatarImagePath; }
+            set
+            {
+                if (_avatarImagePath != value)
+                {
+                    _avatarImagePath = value;
+                    OnPropertyChanged(nameof(AvatarImagePath));
+                }
+            }
+        }
+
+        private void ChooseAvatar(object parameter)
+        {
+            var openFileDialog = new System.Windows.Forms.OpenFileDialog
+            {
+                Filter = "Image Files|*.png;*.jpg;*.jpeg;*.gif;*.bmp",
+                Title = "Выберите аватар"
+            };
+
+            if (openFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                AvatarImagePath = openFileDialog.FileName;
+            }
+            Image = File.ReadAllBytes(AvatarImagePath);
+        }
+
         public string this[string columnName]
         {
             get
@@ -203,11 +315,19 @@ namespace WpfApp1.MVVM.ViewModel
                         else if (Password.Length < 6)
                             return "Password must be at least 6 characters long.";
                         break;
+
                 }
 
                 return null;
             }
         }
+
+
+
+
+
+
+
 
 
 
@@ -241,12 +361,13 @@ namespace WpfApp1.MVVM.ViewModel
 
 
 
-            var mainViewModel = new MainViewModel();
+            var mainViewModel = new MainViewModel(model);
             var mainWindow = new MainWindow();
             mainWindow.DataContext = mainViewModel;
             mainWindow.Show();
+            var cur = System.Windows.Application.Current.MainWindow;
             System.Windows.Application.Current.MainWindow = mainWindow;
-            this.mainWindow.Close();
+            cur.Close();
 
             // Закройте окно авторизации
 
@@ -256,12 +377,27 @@ namespace WpfApp1.MVVM.ViewModel
 
         private void Register(object parameter)
         {
-            // Логика для регистрации нового пользователя
-            // Если успешно, открываем MainWindow
-            var mainWindow = new MainWindow();
-            mainWindow.Show();
-            (parameter as Window)?.Close();
+            var context = new AppDbContextFactory();
+            var dbContext = context.CreateDbContext(null);
+            ContactModel contact = new ContactModel
+            {
+                Image = File.ReadAllBytes(AvatarImagePath),
+                Email = Email,
+                UserName = Name,
+                Password = Password,
+                RegistrationDate = DateTime.Now,
+            };
+            dbContext.dbContacts.Add(contact);
+            dbContext.SaveChangesAsync();
+            Error = "Пользователь добавлен";
+            var loginWindow = new LoginWindow();
+            loginWindow.Show();
+            System.Windows.Application.Current.MainWindow = loginWindow;
+            this.mainWindow.Close();
+
         }
+
+
 
         public bool IsValid()
         {
@@ -270,8 +406,7 @@ namespace WpfApp1.MVVM.ViewModel
 
         private RelayCommand showRegisterView;
         private RelayCommand showLoginView;
-        //public ICommand ShowRegisterViewCommand => showRegisterView ??= new RelayCommand(ShowRegisterView);
-        //public ICommand ShowLoginViewCommand => showLoginView ??= new RelayCommand(ShowLoginView);
+
 
         private void PerformShowRegisterView(object commandParameter)
         {
@@ -279,9 +414,35 @@ namespace WpfApp1.MVVM.ViewModel
 
         private RelayCommand showRegisterPage;
         private RelayCommand showLoginPage;
-        public ICommand ShowRegisterPageCommand;
-        public ICommand ShowLoginPageCommand;
+        public RelayCommand ShowRegisterPageCommand;
+        public RelayCommand ShowLoginPageCommand;
 
+        private ICommand showLoginViewCommand;
+        private ICommand showRegisterViewCommand;
+
+        public ICommand ShowLoginViewCommand
+        {
+            get
+            {
+                if (showLoginViewCommand == null)
+                {
+                    showLoginViewCommand = new RelayCommand(ToLogin);
+                }
+                return showLoginViewCommand;
+            }
+        }
+
+        public ICommand ShowRegisterViewCommand
+        {
+            get
+            {
+                if (showRegisterViewCommand == null)
+                {
+                    showRegisterViewCommand = new RelayCommand(ToRegister);
+                }
+                return showRegisterViewCommand;
+            }
+        }
         //private void PerformShowRegisterPage(object commandParameter)
         //{
         //}

@@ -18,7 +18,8 @@
                             CornerRadius="4"
                             Margin="8,2,8,2">
                         <StackPanel Orientation="Horizontal"
-                                    Margin="10,0,0,0">
+                                    Margin="10,0,0,0"
+                                    MaxWidth="170">
                             <!--<Border Width="30" Height="30"
                                     Background="CornflowerBlue"
                                     CornerRadius="25"/>-->
@@ -28,13 +29,25 @@
                                 </Ellipse.Fill>
                             </Ellipse>
 
-                            <StackPanel>
-                                <Label Content="{Binding UserName}"
-                                       Foreground="White"/>
+                            <StackPanel Orientation="Vertical">
+                                <StackPanel Orientation="Horizontal" MaxWidth="150">
+                                    <Label Content="{Binding UserName}"
+                                            Foreground="White"
+                                            />
+                                    <Label Content="{Binding LastMessage.SentAt, StringFormat='{}{HH:mm:ss}'}"
+                                            Foreground="Gray"
+                                            FontSize="10"
+       
+                                            MaxWidth="150"/>
+
+                                </StackPanel>
+
                                 <Label Content="{Binding LastMessageView}"
-                                       Foreground="Gray"
-                                       FontSize="10"
-                                       MaxWidth="150"/>
+                                        Foreground="red"
+                                        FontSize="10"
+                                        MaxWidth="120"
+                                        Margin="-25,0,0,0"
+                                        />
                             </StackPanel>
 
                         </StackPanel>

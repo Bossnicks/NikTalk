@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "oOoPtrIvTzGg/3+EuUqiE2/H4l5XXdWLu+RrI0HeJ8m4Yf4K3mnHm2Td+B33Mx/bMLorZoUFNibf29aPLqlxWA==",
+  "dgSpecHash": "fJ8Qz01AltLMGqD+7nVDK67YL0kP7VZWuK2JSGmSz2ftTIc6L72BMZuYmo+E58fhAhHsxca6DPXKYI8Fub8RuQ==",
   "success": true,
   "projectFilePath": "C:\\Users\\HP\\Флешка\\Рабочий стол\\Reserve++\\all_versions\\Версия_9\\WpfApp1\\WpfApp1.csproj",
   "expectedPackageFiles": [
@@ -20,6 +20,7 @@
     "C:\\Users\\HP\\.nuget\\packages\\microsoft.netcore.platforms\\3.1.0\\microsoft.netcore.platforms.3.1.0.nupkg.sha512",
     "C:\\Users\\HP\\.nuget\\packages\\microsoft.win32.registry\\4.7.0\\microsoft.win32.registry.4.7.0.nupkg.sha512",
     "C:\\Users\\HP\\.nuget\\packages\\microsoft.win32.systemevents\\8.0.0\\microsoft.win32.systemevents.8.0.0.nupkg.sha512",
+    "C:\\Users\\HP\\.nuget\\packages\\microsoft.xaml.behaviors.wpf\\1.1.77\\microsoft.xaml.behaviors.wpf.1.1.77.nupkg.sha512",
     "C:\\Users\\HP\\.nuget\\packages\\naudio\\2.2.1\\naudio.2.2.1.nupkg.sha512",
     "C:\\Users\\HP\\.nuget\\packages\\naudio.asio\\2.2.1\\naudio.asio.2.2.1.nupkg.sha512",
     "C:\\Users\\HP\\.nuget\\packages\\naudio.core\\2.2.1\\naudio.core.2.2.1.nupkg.sha512",

@@ -7,7 +7,8 @@
         mc:Ignorable="d"
         Title="LoginWimdow" Height="450" Width="380"
         AllowsTransparency="True" Background="Transparent"
-        WindowStyle="None" ResizeMode="NoResize">
+        WindowStyle="None" ResizeMode="NoResize"
+        >
     <Window.DataContext>
         <local:LoginViewModel/>
     </Window.DataContext>
@@ -147,8 +148,8 @@ Panel.ZIndex="1"
                     <Button Style="{StaticResource ButtonStyle}"  Width="100" Height="40" Content="ВХОД" Margin="60,0,60,0" Command="{Binding LoginCommand}"/>
 
 
-                    <Button Style="{x:Null}" Background="Transparent" Margin="0,15,0,5" Width="190" BorderThickness="0" Command="{Binding ShowRegisterPageCommand}">
-                        <Label Content="Нет аккаунта? Зарегистрируйтесь"/>
+                    <Button Style="{x:Null}" Background="Transparent" Margin="0,15,0,5" Width="190" BorderThickness="0" Command="{Binding ShowRegisterViewCommand}">
+                        <Label Width="205"  Content="Нет аккаунта? Зарегистрируйтесь"/>
                     </Button>
                 </StackPanel>
 

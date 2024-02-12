@@ -15,6 +15,8 @@ using Microsoft.VisualBasic;
 using NAudio;
 using NAudio.Wave;
 using System.Windows.Forms;
+using WpfApp1.MVVM.View;
+using WpfApp1.MVVM.Trackers;
 //using System.Windows.Forms;
 
 namespace WpfApp1.MVVM.ViewModel
@@ -27,9 +29,10 @@ namespace WpfApp1.MVVM.ViewModel
         public ObservableCollection<MessageModel> LastMessages { get; set; }
         public ObservableCollection<MessageModel> Messages { get; set; }
         public MessageModel LastMessageView => Messages?.Any() == true ? Messages.Last() : null;
+        public ObservableCollection<ContactModel> UnknownContacts { get; set; }
 
 
-
+        // 14 версия
         /* Commands */
         public ICommand SendPictureCommand { get; set; }
         public ICommand SendCommand { get; set; }
@@ -38,11 +41,12 @@ namespace WpfApp1.MVVM.ViewModel
         public ICommand SaveCommand { get; set; }
         public ICommand ShowDialogMessagesCommand { get; set; }
         public ICommand PlayOrDownloadAudioCommand { get; set; }
-        public ICommand StartEditProfile { get; set; }
+        //public ICommand StartEditProfile { get; set; }
+        public ICommand OpenProfileEditCommand { get; private set; }
 
 
-        private static int authenticatedUserId = 1;
-        private static ContactModel authenticatedUser = GetUserByEmailAndPasswordAsync("1@example.com", "your_password");
+        //private static int Auth = 1;
+        private ContactModel authenticatedUser;
         public ContactModel AuthenticatedUser
         {
             get { return authenticatedUser; }
@@ -51,9 +55,10 @@ namespace WpfApp1.MVVM.ViewModel
                 if (authenticatedUser != value)
                 {
                     authenticatedUser = value;
-                    OnPropertyChanged(nameof(AuthenticatedUser));
                 }
+                OnPropertyChanged(nameof(AuthenticatedUser));
             }
+
         }
 
         private DispatcherTimer timer;
@@ -98,6 +103,11 @@ namespace WpfApp1.MVVM.ViewModel
             }
         }
 
+        public MainViewModel()
+        {
+
+        }
+
 
 
         private ContactModel _selectedContact;
@@ -112,7 +122,32 @@ namespace WpfApp1.MVVM.ViewModel
                 Message = String.Empty;
                 OnPropertyChanged("SelectedContact");
                 ShowDialogMessages();
+            }
+        }
 
+        private ContactModel _selectedUnknownContact;
+
+        public ContactModel SelectedUnknownContact
+        {
+            get { return _selectedUnknownContact; }
+            set
+            {
+                _selectedUnknownContact = value;
+                IsEditing = false;
+                Message = String.Empty;
+                OnPropertyChanged("SelectedUnknownContact");
+            }
+        }
+
+
+        private string _textForSearch;
+
+        public string TextForSearch
+        {
+            get { return _textForSearch; }
+            set
+            {
+                _textForSearch = value;
             }
         }
 
@@ -128,6 +163,22 @@ namespace WpfApp1.MVVM.ViewModel
             }
         }
 
+        private MessageModel lastMessage;
+        public MessageModel LastMessage
+        {
+            get { return lastMessage; }
+            set
+            {
+                if (lastMessage != value)
+                {
+                    lastMessage = value;
+                    OnPropertyChanged(nameof(LastMessage));
+                }
+            }
+        }
+
+
+
         public ICommand MinimizeCommand { get; set; }
         public ICommand MaximizeRestoreCommand { get; set; }
         public ICommand CloseCommand { get; set; }
@@ -135,34 +186,32 @@ namespace WpfApp1.MVVM.ViewModel
         public ICommand SendVoiceMessageCommand { get; set; }
         public ICommand SendStickerCommand { get; set; }
         public ICommand StartEditProfileCommand { get; set; }
+        public ICommand SearchUsersAndDialogsCommand { get; set; }
         //public ICommand StopRecording { get; set; }
         Window mainWindow = System.Windows.Application.Current.MainWindow;
-
-        public MainViewModel()
+        public MainViewModel(ContactModel AuthUser)
         {
+            AuthenticatedUser = AuthUser;
             //try
             //{
             //    //BeginData();
+            //AddStickersFromDirectoryAsync();
+            //GetParentDirectory(3);
+
             //}
             //catch { }
 
-            try
-            {
-                //GetParentDirectory(3);
-                //AddStickersFromDirectoryAsync();
-            }
-            catch
-            {
 
-            }
+
+            UnknownContacts = new ObservableCollection<ContactModel>();
             Stickers = new ObservableCollection<StickerModel>();
-
             Messages = new ObservableCollection<MessageModel>();
             Contacts = new ObservableCollection<ContactModel>();
             LastMessages = new ObservableCollection<MessageModel>();
             //SendVoiceMessage = new RelayCommand(StopRecording, _ => IsRecording);
             //ShowDialogMessagesCommand = new RelayCommand(ShowDialogMessages);
-            //StartEditProfileCommand = new RelayCommand(StartEditProfile);
+            StartEditProfileCommand = new RelayCommand(StartEditProfile);
+            //OpenProfileEditCommand = new RelayCommand(OpenProfileEdit);
             SendStickerCommand = new RelayCommand(SendStickerAsync, _ => SelectedContact != null);
             PlayOrDownloadAudioCommand = new RelayCommand(PlayOrDownloadAudioAsync);
             SendVoiceMessageCommand = new RelayCommand(SendVoiceMessageAsync, _ => SelectedContact != null);
@@ -170,17 +219,18 @@ namespace WpfApp1.MVVM.ViewModel
             DeleteCommand = new RelayCommand(DeleteMessageAsync);
             SaveCommand = new RelayCommand(SaveMessageAsync);
             EditCommand = new RelayCommand(EditMessageAsync);
+            SearchUsersAndDialogsCommand = new RelayCommand(SearchUsersAndDialogs);
             SendPictureCommand = new RelayCommand(SendImageMessageAsync, _ => SelectedContact != null);
             SendCommand = new RelayCommand(SendTextMessageAsync, _ => !String.IsNullOrEmpty(Message) && !IsEditing);
             MinimizeCommand = new RelayCommand(Minimize);
             MaximizeRestoreCommand = new RelayCommand(MaximizeRestore);
             CloseCommand = new RelayCommand(Close);
-            LoadUsersWithDialogs(authenticatedUserId);
             LoadStickersAsync();
-            //timer = new System.Windows.Threading.DispatcherTimer();
-            //timer.Interval = TimeSpan.FromSeconds(1); // Интервал в 3 секунды (можете изменить по необходимости)
-            //timer.Tick += async (sender, e) => await LoadLatestMessageAsync();
-            //timer.Start();
+            LoadUsersWithDialogs(AuthenticatedUser.UserId);
+            timer = new System.Windows.Threading.DispatcherTimer();
+            timer.Interval = TimeSpan.FromSeconds(1); // Интервал в 3 секунды (можете изменить по необходимости)
+            timer.Tick += async (sender, e) => await LoadLatestMessageAsync();
+            timer.Start();
             LoadLatestMessageAsync();
             //_ = LoadLatestMessageAsync();
         }
@@ -207,6 +257,57 @@ namespace WpfApp1.MVVM.ViewModel
             //System.Windows.Forms.Application.DoEvents();
             return parentDirectory;
         }
+
+        //private void OpenProfileEdit(object sender)
+        //{
+        //    // Создание ProfileEditViewModel с передачей AuthenticatedUser
+        //    //var profileEditViewModel = new ProfileEditViewModel(AuthenticatedUser);
+
+        //    // Здесь вы должны открыть окно редактирования профиля, передавая profileEditViewModel
+        //    // Например, создать экземпляр окна и установить DataContext на profileEditViewModel
+        //}
+
+
+        public ContactModel GetAuthenticatedUser(int userId)
+        {
+            var factory = new AppDbContextFactory();
+            using (var context = factory.CreateDbContext(null))
+            {
+                return context.dbContacts.FirstOrDefault(u => u.UserId == userId);
+            }
+        }
+
+        public void SearchUsersAndDialogs(object sender)
+        {
+            LoadUsersWithDialogs(AuthenticatedUser.UserId);
+            LoadUsersWithoutDialogs(AuthenticatedUser.UserId, TextForSearch);
+        }
+
+
+        public void StartEditProfile(object sender)
+        {
+            System.Windows.Application.Current.MainWindow.IsEnabled = false;
+            Profile profile = new Profile();
+            LoginViewModel viewModel = new LoginViewModel(AuthenticatedUser);
+            profile.DataContext = viewModel;
+
+            // Подписываемся на событие
+            viewModel.UserUpdated += (s, e) =>
+            {
+                if (e.Success)
+                {
+                    // Закрываем окно только в случае успешного обновления
+                    AuthenticatedUser = GetAuthenticatedUser(AuthenticatedUser.UserId);
+                    OnPropertyChanged(nameof(AuthenticatedUser));
+                }
+                profile.Close();
+
+                System.Windows.Application.Current.MainWindow.IsEnabled = true;
+            };
+
+            profile.Show();
+        }
+
 
 
         public static async Task AddStickersFromDirectoryAsync()
@@ -253,13 +354,13 @@ namespace WpfApp1.MVVM.ViewModel
         }
 
 
-        public static ContactModel GetUserByEmailAndPasswordAsync(string email, string password)
-        {
-            var context = new AppDbContextFactory();
-            var dbContext = context.CreateDbContext(null);
-            return dbContext.dbContacts
-                .FirstOrDefault(u => u.Email == email && u.Password == password);
-        }
+        //public static ContactModel GetUserByEmailAndPasswordAsync(string email, string password)
+        //{
+        //    var context = new AppDbContextFactory();
+        //    var dbContext = context.CreateDbContext(null);
+        //    return dbContext.dbContacts.FirstOrDefault(u => u.Email == email && u.Password == password);
+
+        //}
 
         private void BeginData()
         {
@@ -315,39 +416,50 @@ namespace WpfApp1.MVVM.ViewModel
                     System.Windows.Application.Current.Dispatcher.Invoke(() =>
                     {
 
-                        message = GetLatestMessage(contact.UserId, authenticatedUserId);
+                        message = GetLatestMessage(contact.UserId, AuthenticatedUser.UserId);
                         if (message.TypeOfMessage == "Image")
                         {
+                            contact.LastMessage = message;
                             contact.LastMessageView = "Image";
                         }
                         else if (message.TypeOfMessage == "Text")
                         {
+                            contact.LastMessage = message;
                             contact.LastMessageView = ConvertersIn.ConvertByteArrayToString(message.Message);
                         }
                         else if (message.TypeOfMessage == "Audio")
                         {
+                            contact.LastMessage = message;
                             contact.LastMessageView = "Audio";
                         }
                         else if (message.TypeOfMessage == "Sticker")
                         {
+                            contact.LastMessage = message;
                             contact.LastMessageView = "Sticker";
                         }
                     });
                 }
             }
-
-            if (SelectedContact != null && SelectedContact.LastMessage.MessageId != LastMessageView.MessageId)
+            Contacts = new ObservableCollection<ContactModel>(Contacts.OrderBy(m => m.LastMessage.SentAt).Reverse());
+            OnPropertyChanged(nameof(Contacts));
+            if (SelectedContact != null)
             {
-                await ShowDialogMessages();
+                if (SelectedContact.LastMessage != null)
+                {
+                    if (SelectedContact.LastMessage.MessageId != LastMessageView?.MessageId)
+                    {
+                        await ShowDialogMessages();
+                    }
+                }
             }
         }
 
-        private MessageModel GetLatestMessage(int contactId, int authenticatedUserId)
+        private MessageModel GetLatestMessage(int contactId, int AuthenticatedUserId)
         {
             var context = new AppDbContextFactory();
             var dbContext = context.CreateDbContext(null);
-            var result = dbContext.dbMessages.Where(msg => (authenticatedUserId == msg.SenderId && contactId == msg.ReceiverId) ||
-            (contactId == msg.SenderId && authenticatedUserId == msg.ReceiverId))
+            var result = dbContext.dbMessages.Where(msg => (AuthenticatedUserId == msg.SenderId && contactId == msg.ReceiverId) ||
+            (contactId == msg.SenderId && AuthenticatedUserId == msg.ReceiverId))
             .OrderByDescending(msg => msg.SentAt)
             .FirstOrDefault();
             if (result == null)
@@ -357,14 +469,14 @@ namespace WpfApp1.MVVM.ViewModel
             return result;
         }
 
-        private void LoadUsersWithDialogs(int authenticatedUserId)
+        private void LoadUsersWithDialogs(int AuthenticatedUserId)
         {
             var factory = new AppDbContextFactory();
             var context = factory.CreateDbContext(null);
             var contacts = context.dbContacts
-                .Where(u => u.UserId != authenticatedUserId &&
-                            (context.dbMessages.Any(m => m.SenderId == authenticatedUserId && (m.ReceiverId == u.UserId || m.SenderId == u.UserId)) ||
-                             context.dbMessages.Any(m => m.ReceiverId == authenticatedUserId && (m.SenderId == u.UserId || m.ReceiverId == u.UserId))))
+                .Where(u => u.UserId != AuthenticatedUserId &&
+                            (context.dbMessages.Any(m => m.SenderId == AuthenticatedUserId && (m.ReceiverId == u.UserId || m.SenderId == u.UserId)) ||
+                             context.dbMessages.Any(m => m.ReceiverId == AuthenticatedUserId && (m.SenderId == u.UserId || m.ReceiverId == u.UserId))))
                 .Select(u => new ContactModel
                 {
                     UserId = u.UserId,
@@ -382,6 +494,40 @@ namespace WpfApp1.MVVM.ViewModel
                 });
             }
         }
+
+        private void LoadUsersWithoutDialogs(int authenticatedUserId, string searchQuery)
+        {
+            var factory = new AppDbContextFactory();
+            var context = factory.CreateDbContext(null);
+
+            var contactsWithoutDialogs = context.dbContacts
+                .Where(u => u.UserId != authenticatedUserId &&
+                            !context.dbMessages.Any(m => (m.SenderId == authenticatedUserId || m.ReceiverId == authenticatedUserId) &&
+                                                          (m.SenderId == u.UserId || m.ReceiverId == u.UserId)))
+                .Where(u => u.UserName.Contains(searchQuery))
+                .Select(u => new ContactModel
+                {
+                    UserId = u.UserId,
+                    UserName = u.UserName,
+                    Image = u.Image,
+                    Email = u.Email,
+                })
+                .ToList();
+
+            UnknownContacts.Clear();
+
+            foreach (var contact in contactsWithoutDialogs)
+            {
+                System.Windows.Application.Current.Dispatcher.Invoke(() =>
+                {
+                    UnknownContacts.Add(contact);
+                });
+            }
+        }
+
+
+
+
 
 
         public async void LoadStickersAsync()
@@ -419,15 +565,15 @@ namespace WpfApp1.MVVM.ViewModel
 
                 // Получаем сообщения с дополнительной информацией об отправителе
                 var messages = await context.dbMessages
-                    .Where(m => ((m.SenderId == authenticatedUserId && m.ReceiverId == SelectedContact.UserId) ||
-                                 (m.SenderId == SelectedContact.UserId && m.ReceiverId == authenticatedUserId)))
+                    .Where(m => ((m.SenderId == AuthenticatedUser.UserId && m.ReceiverId == SelectedContact.UserId) ||
+                                 (m.SenderId == SelectedContact.UserId && m.ReceiverId == AuthenticatedUser.UserId)))
                     .OrderBy(m => m.SentAt)
                     .Select(m => new
                     {
                         Message = m,
-                        Image = m.SenderId == authenticatedUserId ? authenticatedUser.Image :
+                        Image = m.SenderId == AuthenticatedUser.UserId ? authenticatedUser.Image :
                         SelectedContact.Image,
-                        UserName = m.SenderId == authenticatedUserId ? authenticatedUser.UserName :
+                        UserName = m.SenderId == AuthenticatedUser.UserId ? authenticatedUser.UserName :
                         SelectedContact.UserName
                     })
                     .ToListAsync();
@@ -615,6 +761,7 @@ namespace WpfApp1.MVVM.ViewModel
         {
             if (sender is StickerModel)
             {
+
                 AppDbContextFactory factory = new AppDbContextFactory();
                 AppDbContext context = factory.CreateDbContext(null);
                 StickerModel? elem = sender as StickerModel;

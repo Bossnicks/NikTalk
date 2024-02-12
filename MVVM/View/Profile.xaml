@@ -3,17 +3,181 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:WpfApp1"
-        xmlns:viewmodel="clr-namespace:WpfApp1.MVVM.ViewModel" d:DataContext="{d:DesignInstance Type=viewmodel:MainViewModel}"
+        xmlns:local="clr-namespace:WpfApp1.MVVM.ViewModel" xmlns:i="http://schemas.microsoft.com/xaml/behaviors" d:DataContext="{d:DesignInstance Type=local:LoginViewModel}"
         mc:Ignorable="d"
-        Title="Profile Edit" Height="300" Width="400">
-
+        Title="Profile" Height="450" Width="380"
+        AllowsTransparency="True" Background="Transparent"
+        WindowStyle="None" ResizeMode="NoResize"
+        >
+    <Window.DataContext>
+        <local:LoginViewModel x:Name="LoginViewModelInstance"/>
+    </Window.DataContext>
     <Grid>
-        <!-- UI для редактирования профиля, например, TextBox для имени, Email и т.д. -->
-        <TextBox Text="{Binding AuthenticatedUser.UserName}" />
-        <TextBox Text="{Binding AuthenticatedUser.Email}" />
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="25"/>
+                <RowDefinition Height="40"/>
+                <RowDefinition Height="385"/>
+            </Grid.RowDefinitions>
+            <Border Grid.RowSpan="1" Grid.Row="0"
+Background="#252525"
+Panel.ZIndex="1"
+>
+                <Grid  HorizontalAlignment="Stretch" MouseDown="Border_MouseDown">
+                    <Label Content="NikTalk"
+       Foreground="Gray"
+       FontWeight="SemiBold"/>
 
-        <!-- Кнопка сохранения изменений -->
-        <Button Content="Save Changes" Command="{Binding SaveChangesCommand}" />
+                </Grid>
+            </Border>
+
+
+            <Border CornerRadius="10" Grid.RowSpan="3">
+                <Border.Background>
+                    <LinearGradientBrush>
+                        <GradientStop Color="#2F3136" Offset="0.0"/>
+                        <GradientStop Color="#36393F" Offset="1"/>
+                    </LinearGradientBrush>
+                </Border.Background>
+            </Border>
+
+
+            <StackPanel VerticalAlignment="Center" Grid.Row="1">
+                <TextBlock Text="Профиль"
+       FontWeight="Light"
+       FontFamily="helvetica"
+       FontSize="22"
+       Foreground="White"
+       HorizontalAlignment="Center"/>
+            </StackPanel>
+
+
+
+
+
+            <StackPanel Grid.Row="2" >
+                <StackPanel>
+                    <Border Background="AliceBlue" Width="100" Height="100" CornerRadius="50">
+                        <Ellipse Width="100" Height="100">
+                            <Ellipse.Fill>
+                                <ImageBrush ImageSource="{Binding Image}" Stretch="UniformToFill"/>
+                            </Ellipse.Fill>
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="MouseLeftButtonDown">
+                                    <i:InvokeCommandAction Command="{Binding ChooseAvatarCommand}" />
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
+                        </Ellipse>
+                    </Border>
+
+
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <TextBox FontFamily="Helvetica"
+         FontWeight="Light"
+         Text="{Binding Email, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"
+         FontSize="20"
+         HorizontalAlignment="Center"
+         Foreground="White"
+         Background="Transparent"
+         BorderThickness="0"
+         Width="250"
+         HorizontalContentAlignment="Left"
+         Opacity="0.5"
+         Height="25"
+         Margin="65,20,0,0">
+                        <TextBox.Style>
+                            <Style TargetType="TextBox">
+                                <Style.Triggers>
+                                    <Trigger Property="Validation.HasError" Value="true">
+                                        <Setter Property="ToolTip" Value="{Binding RelativeSource={RelativeSource Self}, Path=(Validation.Errors)[0].ErrorContent}"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </TextBox.Style>
+                    </TextBox>
+
+                </StackPanel>
+                <Border Width="250"
+    Height="2"
+    Background="White"
+    Opacity="0.5"/>
+
+
+
+
+                <StackPanel Orientation="Horizontal" Margin="0,20,0,0">
+                    <TextBox FontFamily="Helvetica"
+     FontWeight="Light"
+     Text="{Binding Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"
+     FontSize="20"
+     HorizontalAlignment="Center"
+     Foreground="White"
+     Background="Transparent"
+     BorderThickness="0"
+     Width="250"
+     HorizontalContentAlignment="Left"
+     Opacity="0.5"
+     Height="25"
+     Margin="65,0,0,0">
+                        <TextBox.Style>
+                            <Style TargetType="TextBox">
+                                <Style.Triggers>
+                                    <Trigger Property="Validation.HasError" Value="true">
+                                        <Setter Property="ToolTip" Value="{Binding RelativeSource={RelativeSource Self}, Path=(Validation.Errors)[0].ErrorContent}"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </TextBox.Style>
+                    </TextBox>
+
+                </StackPanel>
+                <Border Width="250"
+    Height="2"
+    Background="White"
+    Opacity="0.5"/>
+
+                <StackPanel Orientation="Horizontal" Margin="0,20,0,0">
+                    <TextBox FontFamily="Helvetica"
+     FontWeight="Light"
+     Text="{Binding Password, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"
+     FontSize="20"
+     HorizontalAlignment="Center"
+     Foreground="White"
+     Background="Transparent"
+     BorderThickness="0"
+     Width="250"
+     HorizontalContentAlignment="Left"
+     Opacity="0.5"
+     Height="25"
+     Margin="65,0,0,0">
+                        <TextBox.Style>
+                            <Style TargetType="TextBox">
+                                <Style.Triggers>
+                                    <Trigger Property="Validation.HasError" Value="true">
+                                        <Setter Property="ToolTip" Value="{Binding RelativeSource={RelativeSource Self}, Path=(Validation.Errors)[0].ErrorContent}"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </TextBox.Style>
+                    </TextBox>
+
+                </StackPanel>
+                <Border Width="250"
+    Height="2"
+    Background="White"
+    Opacity="0.5"/>
+
+                <Label Content="{Binding Error}" HorizontalAlignment="Center" Foreground="Red"/>
+
+                <StackPanel Orientation="Vertical" Margin="0,40,0,0">
+                    <Button Style="{StaticResource ButtonStyle}"  Width="100" Height="40" Content="СОХРАНИТЬ" Margin="60,0,60,0" Command="{Binding UpdateUserCommand}"/>
+                </StackPanel>
+
+            </StackPanel>
+        </Grid>
+        <!--<ContentControl Content="{Binding CurrentView}" />-->
+        <!--<Frame x:Name="MainFrame" NavigationUIVisibility="Hidden"/>-->
+
     </Grid>
 </Window>

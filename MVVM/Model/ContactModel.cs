@@ -2,10 +2,12 @@
 using System.ComponentModel.DataAnnotations;
 using System;
 using System.Numerics;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
 
 namespace WpfApp1.MVVM.Model
 {
-    public class ContactModel
+    public class ContactModel : INotifyPropertyChanged
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
@@ -21,11 +23,41 @@ namespace WpfApp1.MVVM.Model
         public string Password { get; set; }
         [Column("RegistrationDate", TypeName = "timestamp")]
         public DateTime RegistrationDate { get; set; }
+        private MessageModel _lastMessage;
         [NotMapped]
-        public MessageModel LastMessage { get; set; }
+        public MessageModel LastMessage
+        {
+            get { return _lastMessage; }
+            set
+            {
+                if (_lastMessage != value)
+                {
+                    _lastMessage = value;
+                    OnPropertyChanged(nameof(LastMessage));
+                }
+            }
+        }
+        private string _lastMessageView;
         [NotMapped]
-        public string LastMessageView { get; set; }
+        public string LastMessageView
+        {
+            get { return _lastMessageView; }
+            set
+            {
+                if (_lastMessageView != value)
+                {
+                    _lastMessageView = value;
+                    OnPropertyChanged(nameof(LastMessageView));
+                }
+            }
+        }
         //public ICollection<MessageModel> Messages { get; set; }
+        public event PropertyChangedEventHandler PropertyChanged;
+        public void OnPropertyChanged([CallerMemberName] string prop = "")
+        {
+            if (PropertyChanged != null)
+                PropertyChanged(this, new PropertyChangedEventArgs(prop));
+        }
 
 
     }
@@ -140,19 +172,7 @@ namespace WpfApp1.MVVM.Model
 //                }
 //            }
 //        }
-//        private MessageModel lastMessage;
-//        public virtual MessageModel LastMessage
-//        {
-//            get { return lastMessage; }
-//            set
-//            {
-//                if (lastMessage != value)
-//                {
-//                    lastMessage = value;
-//                    OnPropertyChanged(nameof(LastMessage));
-//                }
-//            }
-//        }
+
 
 //        //public virtual ICollection<MessageModel> ChatMessages { get; set; }
 
