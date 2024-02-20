@@ -8,7 +8,7 @@
         xmlns:conv="clr-namespace:WpfApp1.Converters" d:DataContext="{d:DesignInstance Type=viewmodel:MainViewModel}"
         mc:Ignorable="d"
         Title="MainWindow" Height="650" Width="1200"
-        Background="#36393F" WindowStyle="None" AllowsTransparency="True"
+        Background="{DynamicResource BorderColor}" WindowStyle="None" AllowsTransparency="True"
         ResizeMode="CanResizeWithGrip"
         >
     <!--<Window.DataContext>
@@ -162,29 +162,25 @@
                     <StackPanel Orientation="Horizontal"
                                 HorizontalAlignment="Right">
 
-                        <Image Width="20" Height="20"
-                               RenderOptions.BitmapScalingMode="Fant"
-                               Margin="5,0,5,0"
-                               Source="./Icons/phone.png"/>
-
-                        <Image Width="20" Height="20"
+                        <Button Click="Button_Click_Theme">
+                            <Image Width="20" Height="20"
                                RenderOptions.BitmapScalingMode="Fant"
                                Margin="5,0,5,0"
                                Source="./Icons/camera.png"/>
+                        </Button>
                     </StackPanel>
 
                 </Grid>
             </Border>
-
-            <ListView ItemsSource="{Binding Messages}"
-                      SelectedItem="{Binding SelectedMessage}"
-                      Background="Transparent"
-                      ScrollViewer.VerticalScrollBarVisibility="Hidden"
-                      BorderThickness="0"
-                      ScrollViewer.CanContentScroll="False"
-                      ItemContainerStyle="{StaticResource ChatItem}"
-                      Margin="8,0,0,0"
-                      Grid.Row="1"/>
+            <Grid Grid.Row="1" Name="grid" Background="Transparent">
+                <ScrollViewer Name="scrollViewer" VerticalScrollBarVisibility="Auto" PreviewMouseWheel="OnMouseWheel" ScrollChanged="OnScrollChanged">
+                    <ListView ItemsSource="{Binding Messages}" 
+      Background="Transparent"
+      BorderThickness="0"
+      ItemContainerStyle="{StaticResource ChatItem}"
+      Margin="8,0,0,0" />
+                </ScrollViewer>
+            </Grid>
 
             <Grid Grid.Row="2">
                 <Grid.ColumnDefinitions>

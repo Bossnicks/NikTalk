@@ -14,7 +14,7 @@ namespace WpfApp1.Core
 
         public void OnPropertyChanged([CallerMemberName] string propertyname = null)
         {
-            PropertyChanged.Invoke(this, new PropertyChangedEventArgs(propertyname));
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyname));
         }
     }
 }

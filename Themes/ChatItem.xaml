@@ -103,6 +103,12 @@
                                        FontSize="11"
                                        Margin="0,1,0,0"
                                        VerticalAlignment="Center"/>
+                                <Label Content="{Binding IsRead}"
+                                       Foreground="Green"
+                                       FontWeight="SemiBold"
+                                       FontSize="11"
+                                       Margin="0,1,0,0"
+                                       VerticalAlignment="Center"/>
                                 <ContentControl Content="{Binding}"
                                             ContentTemplateSelector="{StaticResource DeleteUpdateTemplateSelector}"/>
                             </StackPanel>

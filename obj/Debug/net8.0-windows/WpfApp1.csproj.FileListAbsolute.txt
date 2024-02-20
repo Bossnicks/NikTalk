@@ -145,3 +145,5 @@ C:\Users\HP\Флешка\Рабочий стол\Reserve++\all_versions\Верс
 C:\Users\HP\Флешка\Рабочий стол\Reserve++\all_versions\Версия_9\WpfApp1\obj\Debug\net8.0-windows\MVVM\View\Profile.baml
 C:\Users\HP\Флешка\Рабочий стол\Reserve++\all_versions\Версия_9\WpfApp1\obj\Debug\net8.0-windows\MVVM\View\RegisterView.baml
 C:\Users\HP\Флешка\Рабочий стол\Reserve++\all_versions\Версия_9\WpfApp1\bin\Debug\net8.0-windows\Microsoft.Xaml.Behaviors.dll
+C:\Users\HP\Флешка\Рабочий стол\Reserve++\all_versions\Версия_9\WpfApp1\obj\Debug\net8.0-windows\Themes\DarkTheme.baml
+C:\Users\HP\Флешка\Рабочий стол\Reserve++\all_versions\Версия_9\WpfApp1\obj\Debug\net8.0-windows\Themes\LightTheme.baml

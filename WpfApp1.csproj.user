@@ -31,6 +31,12 @@
     <Page Update="Themes\ContactCard.xaml">
       <SubType>Designer</SubType>
     </Page>
+    <Page Update="Themes\DarkTheme.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Themes\LightTheme.xaml">
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="Themes\MessageBox.xaml">
       <SubType>Designer</SubType>
     </Page>

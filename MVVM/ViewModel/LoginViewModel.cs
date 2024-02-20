@@ -140,6 +140,9 @@ namespace WpfApp1.MVVM.ViewModel
         public ICommand ChooseAvatarCommand { get; set; }
         public LoginViewModel()
         {
+            //MainViewModel.BeginData();
+            MainViewModel.AddStickersFromDirectoryAsync();
+            MainViewModel.GetParentDirectory(3);
 
             CloseCommand = new RelayCommand(Close);
             MinimizeCommand = new RelayCommand(Minimize);
@@ -195,7 +198,7 @@ namespace WpfApp1.MVVM.ViewModel
                 existingContact.Email = Email;
                 existingContact.UserName = Name;
                 existingContact.Password = Password;
-                existingContact.Image = File.ReadAllBytes(AvatarImagePath);
+                existingContact.Image = AvatarImagePath == null ? File.ReadAllBytes(AvatarImagePath) : null;
 
                 // Другие свойства, которые вы хотите обновить
 
@@ -381,9 +384,9 @@ namespace WpfApp1.MVVM.ViewModel
             var dbContext = context.CreateDbContext(null);
             ContactModel contact = new ContactModel
             {
-                Image = File.ReadAllBytes(AvatarImagePath),
+                Image = AvatarImagePath == null ? File.ReadAllBytes(AvatarImagePath) : null,
                 Email = Email,
-                UserName = Name,
+                UserName = Name == null ? "crfe" : Name,
                 Password = Password,
                 RegistrationDate = DateTime.Now,
             };

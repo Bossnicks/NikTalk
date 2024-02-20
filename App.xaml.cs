@@ -11,6 +11,7 @@ using WpfApp1.MVVM.Model;
 using Microsoft.EntityFrameworkCore.Design;
 using Microsoft.Extensions.Options;
 using System.IO;
+using WpfApp1.MVVM.ViewModel;
 
 namespace WpfApp1
 {
@@ -21,7 +22,7 @@ namespace WpfApp1
     {
         private void OnStartup(object sender, StartupEventArgs e)
         {
-            
+
         }
     }
 
@@ -36,7 +37,7 @@ namespace WpfApp1
         }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseNpgsql("Server=localhost;Database=Messas;User Id=postgres;Password=1111;");
+            optionsBuilder.UseNpgsql("Server=DESKTOP-NFDA02C;Database=Messages;User Id=postgres;Password=1111;");
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -66,7 +67,7 @@ namespace WpfApp1
         public AppDbContext CreateDbContext(string[] args)
         {
             var optionsBuilder = new DbContextOptionsBuilder<AppDbContext>();
-            optionsBuilder.UseNpgsql("Server=localhost;Database=Messas;User Id=postgres;Password=1111;");
+            optionsBuilder.UseNpgsql("Server=DESKTOP-NFDA02C;Database=Messages;User Id=postgres;Password=1111;");
 
             return new AppDbContext(optionsBuilder.Options);
         }

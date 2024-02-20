@@ -46,7 +46,7 @@ namespace WpfApp1.MVVM.ViewModel
 
 
         //private static int Auth = 1;
-        private ContactModel authenticatedUser;
+        public static ContactModel? authenticatedUser;
         public ContactModel AuthenticatedUser
         {
             get { return authenticatedUser; }
@@ -191,12 +191,11 @@ namespace WpfApp1.MVVM.ViewModel
         Window mainWindow = System.Windows.Application.Current.MainWindow;
         public MainViewModel(ContactModel AuthUser)
         {
+
             AuthenticatedUser = AuthUser;
             //try
             //{
-            //    //BeginData();
-            //AddStickersFromDirectoryAsync();
-            //GetParentDirectory(3);
+
 
             //}
             //catch { }
@@ -279,8 +278,16 @@ namespace WpfApp1.MVVM.ViewModel
 
         public void SearchUsersAndDialogs(object sender)
         {
-            LoadUsersWithDialogs(AuthenticatedUser.UserId);
-            LoadUsersWithoutDialogs(AuthenticatedUser.UserId, TextForSearch);
+            try
+            {
+                LoadUsersWithDialogs(AuthenticatedUser.UserId);
+                LoadUsersWithoutDialogs(AuthenticatedUser.UserId, TextForSearch);
+            }
+            catch
+            {
+
+            }
+
         }
 
 
@@ -362,7 +369,7 @@ namespace WpfApp1.MVVM.ViewModel
 
         //}
 
-        private void BeginData()
+        public static void BeginData()
         {
             var context = new AppDbContextFactory();
             var dbContext = context.CreateDbContext(null);
@@ -387,21 +394,12 @@ namespace WpfApp1.MVVM.ViewModel
                 {
                     SenderId = 1 + imageFiles.Length - i,
                     ReceiverId = i,
-                    TypeOfMessage = "картинка",  // Установите актуальный пароль
+                    TypeOfMessage = "Image",  // Установите актуальный пароль
                     SentAt = DateTime.Now,
                     Message = File.ReadAllBytes(imageFiles[i - 1]),  // Считываем содержимое файла как массив байтов
                     IsRead = false,
                 };
                 dbContext.dbMessages.Add(message);
-            }
-            dbContext.SaveChanges();
-            for (int i = 0; i < imageFiles.Length; i++)
-            {
-                var sticker = new StickerModel
-                {
-                    Sticker = File.ReadAllBytes(imageFiles[i])  // Считываем содержимое файла как массив байтов
-                };
-                dbContext.dbStickers.Add(sticker);
             }
             dbContext.SaveChanges();
         }
