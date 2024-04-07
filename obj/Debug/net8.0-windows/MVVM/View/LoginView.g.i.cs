@@ -54,7 +54,7 @@ namespace WpfApp1.MVVM.View {
                 return;
             }
             _contentLoaded = true;
-            System.Uri resourceLocater = new System.Uri("/WpfApp1;component/mvvm/view/loginview.xaml", System.UriKind.Relative);
+            System.Uri resourceLocater = new System.Uri("/WpfApp1;V1.0.0.0;component/mvvm/view/loginview.xaml", System.UriKind.Relative);
             
             #line 1 "..\..\..\..\..\MVVM\View\LoginView.xaml"
             System.Windows.Application.LoadComponent(this, resourceLocater);

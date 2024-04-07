@@ -14,7 +14,7 @@ namespace WpfApp1.MVVM.Model
         [Column("UserId", TypeName = "int")]
         public int UserId { get; set; }
         [Column("UserName", TypeName = "text")]
-        public string UserName { get; set; }
+        public string? UserName { get; set; }
         [Column("Image", TypeName = "bytea")]
         public byte[]? Image { get; set; }
         [Column("Email", TypeName = "text")]

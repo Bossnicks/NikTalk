@@ -13,7 +13,16 @@
     <Page Update="MVVM\View\Authorization.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="MVVM\View\LoginView.xaml">
+    <Page Update="MVVM\View\ButtonStyles.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="MVVM\View\ChatItem.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="MVVM\View\ContactCard.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="MVVM\View\MessageBox.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="MVVM\View\Profile.xaml">
@@ -22,28 +31,16 @@
     <Page Update="MVVM\View\RegisterView.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="Themes\ButtonStyles.xaml">
+    <Page Update="MVVM\View\StickerCard.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="Themes\ChatItem.xaml">
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Update="Themes\ContactCard.xaml">
+    <Page Update="MVVM\View\TextBoxMessage.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Themes\DarkTheme.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Themes\LightTheme.xaml">
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Update="Themes\MessageBox.xaml">
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Update="Themes\StickerCard.xaml">
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Update="Themes\TextBoxMessage.xaml">
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>

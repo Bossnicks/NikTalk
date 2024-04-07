@@ -27,21 +27,17 @@
                Margin="10"
                Command="{Binding DataContext.PlayOrDownloadAudioCommand, RelativeSource={RelativeSource AncestorType={x:Type ListView}}}" CommandParameter="{Binding}"
                >
-
                 <Button.Resources>
                     <Style TargetType="{x:Type Border}">
                         <Setter Property="CornerRadius" Value="20"/>
                     </Style>
                 </Button.Resources>
-
                 <ContentControl>
                     <ContentControl.Content>
-                        <Image Source="../Icons/play.png"/>
+                        <Image Source="/Icons/play.png"/>
                     </ContentControl.Content>
                 </ContentControl>
             </Button>
-
-
             <StackPanel Orientation="Vertical">
                 <Label Width="auto" Height="30" FontSize="15" Margin="0,5,0,0" HorizontalAlignment="Left" VerticalAlignment="Center" Content="Audio" />
                 <Label Width="auto" Height="30" FontSize="15" Margin="0,-10,0,0" HorizontalAlignment="Left" VerticalAlignment="Center" Content="{Binding SentAt}" />
@@ -50,18 +46,26 @@
     </DataTemplate>
     <DataTemplate x:Key="ImageTemplateUP">
         <Button Style="{StaticResource ButtonStyle}" Command="{Binding DataContext.DeleteCommand, RelativeSource={RelativeSource AncestorType={x:Type ListView}}}" CommandParameter="{Binding}" HorizontalAlignment="Center" VerticalAlignment="Center" Width="27" Height="27" Background="Transparent" BorderThickness="0">
-            <Image Width="16" Height="16" Source="../Icons/cancel.png" RenderOptions.BitmapScalingMode="Fant"/>
+            <Image Width="16" Height="16" Source="/Icons/cancel.png" RenderOptions.BitmapScalingMode="Fant"/>
         </Button>
     </DataTemplate>
     <DataTemplate x:Key="TextTemplateUP">
         <StackPanel Orientation="Horizontal">
             <Button Style="{StaticResource ButtonStyle}" Command="{Binding DataContext.EditCommand, RelativeSource={RelativeSource AncestorType={x:Type ListView}}}" CommandParameter="{Binding}" HorizontalAlignment="Center" VerticalAlignment="Center" Width="27" Height="27" Background="Transparent" BorderThickness="0">
-                <Image Width="24" Height="24" Source="../Icons/edit.png" RenderOptions.BitmapScalingMode="Fant"/>
+                <Image Width="24" Height="24" Source="/Icons/edit.png" RenderOptions.BitmapScalingMode="Fant"/>
             </Button>
             <Button Style="{StaticResource ButtonStyle}" Command="{Binding DataContext.DeleteCommand, RelativeSource={RelativeSource AncestorType={x:Type ListView}}}" CommandParameter="{Binding}" HorizontalAlignment="Center" VerticalAlignment="Center" Width="27" Height="27" Background="Transparent" BorderThickness="0">
-                <Image Width="16" Height="16" Source="../Icons/cancel.png" RenderOptions.BitmapScalingMode="Fant"/>
+                <Image Width="16" Height="16" Source="/Icons/cancel.png" RenderOptions.BitmapScalingMode="Fant"/>
             </Button>
         </StackPanel>
+    </DataTemplate>
+    <DataTemplate x:Key="ReadTemplate">
+        <Image Source="/Icons/read.png" Width="24" Height="24" RenderOptions.BitmapScalingMode="Fant"/>
+    </DataTemplate>
+    <DataTemplate x:Key="UnReadTemplate">
+        <Image Source="/Icons/unread.png" Width="24" Height="24" RenderOptions.BitmapScalingMode="Fant"/>
+    </DataTemplate>
+    <DataTemplate x:Key="NonReadTemplate">
     </DataTemplate>
 
     <temp:MessageTemplateSelector x:Key="MessageTemplateSelector"
@@ -72,6 +76,10 @@
     <temp:DeleteUpdateTemplateSelector x:Key="DeleteUpdateTemplateSelector"
                                        ImageTemplateUP="{StaticResource ImageTemplateUP}"
                                        TextTemplateUP="{StaticResource TextTemplateUP}"/>
+    <temp:ReadTemplateSelector x:Key="ReadTemplateSelector"
+                                       ReadTemplate="{StaticResource ReadTemplate}"
+                                       UnReadTemplate="{StaticResource UnReadTemplate}"
+                                       NonReadTemplate="{StaticResource NonReadTemplate}"/>
 
 
 
@@ -90,7 +98,7 @@
                             <StackPanel Orientation="Horizontal">
 
                                 <Label Content="{Binding UserName}" 
-                                       Foreground="DarkRed"
+                                       Foreground="{DynamicResource ChatNameColor}"
                                        FontWeight="SemiBold"
                                        FontSize="14"
                                        VerticalAlignment="Center"
@@ -98,26 +106,19 @@
                                        Padding="0,0,0,0"
                                        />
                                 <Label Content="{Binding SentAt}"
-                                       Foreground="#AAAAAA"
+                                       Foreground="{DynamicResource ChatDateColor}"
                                        FontWeight="SemiBold"
                                        FontSize="11"
                                        Margin="0,1,0,0"
                                        VerticalAlignment="Center"/>
-                                <Label Content="{Binding IsRead}"
-                                       Foreground="Green"
-                                       FontWeight="SemiBold"
-                                       FontSize="11"
-                                       Margin="0,1,0,0"
-                                       VerticalAlignment="Center"/>
+                                <ContentControl Content="{Binding}"
+                                            ContentTemplateSelector="{StaticResource ReadTemplateSelector}"/>
                                 <ContentControl Content="{Binding}"
                                             ContentTemplateSelector="{StaticResource DeleteUpdateTemplateSelector}"/>
                             </StackPanel>
                             <ContentControl Content="{Binding}"
                                             ContentTemplateSelector="{StaticResource MessageTemplateSelector}"/>
                         </StackPanel>
-
-                        <!-- Use DataTemplateSelector to conditionally show either an Image or Text -->
-
                     </StackPanel>
                 </ControlTemplate>
             </Setter.Value>

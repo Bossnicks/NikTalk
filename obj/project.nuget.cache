@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "fJ8Qz01AltLMGqD+7nVDK67YL0kP7VZWuK2JSGmSz2ftTIc6L72BMZuYmo+E58fhAhHsxca6DPXKYI8Fub8RuQ==",
+  "dgSpecHash": "ify69O2Vh7c2r9rDZtWKtw/iM59/1oUdm4yMrFZDLZw2POAvkcF8uA80Cl68iNfOmbmh8WHYukEbdYKOeckQVg==",
   "success": true,
-  "projectFilePath": "C:\\Users\\HP\\Флешка\\Рабочий стол\\Reserve++\\all_versions\\Версия_9\\WpfApp1\\WpfApp1.csproj",
+  "projectFilePath": "D:\\Флешка\\Рабочий стол\\Reserve++\\all_versions\\Версия_9\\WpfApp1\\WpfApp1.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\HP\\.nuget\\packages\\microsoft.entityframeworkcore\\8.0.0\\microsoft.entityframeworkcore.8.0.0.nupkg.sha512",
     "C:\\Users\\HP\\.nuget\\packages\\microsoft.entityframeworkcore.abstractions\\8.0.0\\microsoft.entityframeworkcore.abstractions.8.0.0.nupkg.sha512",

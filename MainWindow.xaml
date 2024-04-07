@@ -31,7 +31,7 @@
 
 
         <Border Grid.ColumnSpan="3"
-                Background="#252525"
+                Background="{DynamicResource BackgroundColor}"
                 MouseDown="Border_MouseDown">
             <Grid HorizontalAlignment="Stretch">
                 <Label Content="NikTalk"
@@ -65,7 +65,7 @@
             </Grid>
         </Border>
 
-        <Grid Background="#2f3136"
+        <Grid Background="{DynamicResource PlusBackgroundColor}"
               Grid.Row="1">
             <Grid.RowDefinitions>
                 <RowDefinition Height="50"/>
@@ -76,20 +76,22 @@
             <Label Content="Contacts and dialogs"
                    VerticalAlignment="Center"
                    FontWeight="Medium"
-                   Foreground="Gray"
+                   Foreground="{DynamicResource LabelColor}"
                    Margin="8,0,0,0"/>
             <StackPanel Grid.Row="1" Orientation="Vertical">
                 <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
-                    <TextBox Width="150" Margin="10,0,0,0" x:Name="textBoxSearch" HorizontalAlignment="Center" BorderThickness="0" Background="#3e4147" Height="30"
-                                 Text="{Binding TextForSearch}"/>
-                    <Button Background="#3e4147" Height="30" Width="30" BorderThickness="0" Command="{Binding SearchUsersAndDialogsCommand}"/>
+                    <TextBox Width="150" Margin="10,0,0,0" x:Name="textBoxSearch" HorizontalAlignment="Center" BorderThickness="0" Background="{DynamicResource SearchColor}" Height="30"
+                                 Text="{Binding TextForSearch, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                    <Button Background="{DynamicResource SearchColor}" Height="30" Width="30" BorderThickness="0" Command="{Binding SearchUsersAndDialogsCommand}">
+                        <Image Source="/Icons/search.png"/>
+                    </Button>
                 </StackPanel>
                 <ListView ItemsSource="{Binding Contacts}"
                           SelectedItem="{Binding SelectedContact}"
                           Background="Transparent"
                           BorderThickness="0"
                           ItemContainerStyle="{StaticResource ContactCard}"/>
-                <Label Content="Другие пользователи" Margin="8,0,0,0" Foreground="gray"/>
+                <Label Content="Другие пользователи" Margin="8,0,0,0" Foreground="{DynamicResource LabelColor}"/>
                 <ListView ItemsSource="{Binding UnknownContacts}"
                           SelectedItem="{Binding SelectedContact}"
                           Background="Transparent"
@@ -114,7 +116,7 @@
             <Button Grid.Row="2" Command="{Binding StartEditProfileCommand}">
                 <Button.Template>
                     <ControlTemplate TargetType="Button">
-                        <StackPanel Orientation="Horizontal" Background="#292B2F">
+                        <StackPanel Orientation="Horizontal" Background="{DynamicResource UpdateColor}">
                             <Border CornerRadius="25" Width="30" Height="30" Margin="18,0,0,0">
                                 <Ellipse>
                                     <Ellipse.Fill>
@@ -124,7 +126,7 @@
                             </Border>
                             <StackPanel VerticalAlignment="Center">
                                 <Label Content="{Binding AuthenticatedUser.UserName}"
-                           Foreground="White"
+                           Foreground="{DynamicResource TextColor}"
                            FontWeight="SemiBold"
                            Margin="0,-5,0,-5"/>
                                 <!--<Label Content="Custom Status"
@@ -149,12 +151,12 @@
                 <RowDefinition Height="70"/>
             </Grid.RowDefinitions>
 
-            <Border BorderBrush="#2F3136"
+            <Border BorderBrush="{DynamicResource PlusBackgroundColor}"
                     BorderThickness="0,0,0,2">
                 <Grid HorizontalAlignment="Stretch"
                       Margin="8">
-                    <Label Content="@Username"
-                           Foreground="White"
+                    <Label Content="{Binding AuthenticatedUser.UserName}"
+                           Foreground="{DynamicResource TextColor}"
                            FontWeight="Bold"
                            Margin="5,0,5,0"
                            VerticalAlignment="Center"/>
@@ -166,14 +168,14 @@
                             <Image Width="20" Height="20"
                                RenderOptions.BitmapScalingMode="Fant"
                                Margin="5,0,5,0"
-                               Source="./Icons/camera.png"/>
+                               Source="/Icons/lightdark.png"/>
                         </Button>
                     </StackPanel>
 
                 </Grid>
             </Border>
             <Grid Grid.Row="1" Name="grid" Background="Transparent">
-                <ScrollViewer Name="scrollViewer" VerticalScrollBarVisibility="Auto" PreviewMouseWheel="OnMouseWheel" ScrollChanged="OnScrollChanged">
+                <ScrollViewer Name="scrollViewer" VerticalScrollBarVisibility="Hidden" PreviewMouseWheel="OnMouseWheel" ScrollChanged="OnScrollChanged">
                     <ListView ItemsSource="{Binding Messages}" 
       Background="Transparent"
       BorderThickness="0"
@@ -251,7 +253,7 @@
 
             </Grid>
         </Grid>
-        <Grid Background="#2f3136"
+        <Grid Background="{DynamicResource PlusBackgroundColor}"
             Grid.Row="2" Grid.Column="3">
             <Grid.RowDefinitions>
                 <RowDefinition Height="50"/>

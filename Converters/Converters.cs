@@ -9,7 +9,7 @@ using WpfApp1.MVVM.Model;
 
 namespace WpfApp1.Converters
 {
-    internal static class ConvertersIn 
+    internal static class ConvertersIn
     {
         public static string ConvertByteArrayToString(byte[] byteArray)
         {

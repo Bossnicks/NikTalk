@@ -25,7 +25,7 @@ namespace WpfApp1.MVVM.Model
         [Column("IsRead", TypeName = "bool")]
         public bool IsRead { get; set; }
         [NotMapped]
-        public string UserName {  get; set; }
+        public string UserName { get; set; }
         [NotMapped]
         public byte[] Image { get; set; }
         //public int? UserId { get; set; }

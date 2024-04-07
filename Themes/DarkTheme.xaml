@@ -3,4 +3,12 @@
     <SolidColorBrush x:Key="BackgroundColor" Color="#252525"/>
     <SolidColorBrush x:Key="BorderColor" Color="#36393F"/>
     <SolidColorBrush x:Key="LabelColor" Color="Gray"/>
+    <SolidColorBrush x:Key="PlusBackgroundColor" Color="#2f3136"/>
+    <SolidColorBrush x:Key="SearchColor" Color="#3e4147"/>
+    <SolidColorBrush x:Key="UpdateColor" Color="#292B2F"/>
+    <SolidColorBrush x:Key="TextColor" Color="White"/>
+    <SolidColorBrush x:Key="ChatDateColor" Color="#AAAAAA"/>
+    <SolidColorBrush x:Key="ChatNameColor" Color="DarkRed"/>
+    <SolidColorBrush x:Key="ListViewContactBack" Color="#393b40"/>
+    <SolidColorBrush x:Key="SelectedContactMessage" Color="Red"/>
 </ResourceDictionary>

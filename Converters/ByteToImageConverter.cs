@@ -57,4 +57,22 @@ namespace WpfApp1.Converters
         }
     }
 
+    public class DateTimeConverter : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            if (value is DateTime dateTime)
+            {
+                return dateTime.ToString("yyyy-MM-dd HH:mm");
+            }
+
+            return value?.ToString(); // Use ToString() for null or unexpected types
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            throw new NotImplementedException();
+        }
+    }
+
 }

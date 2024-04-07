@@ -47,10 +47,8 @@ namespace WpfApp1
         }
         private void Button_Click_Theme(object sender, RoutedEventArgs e)
         {
-            // Загрузите словари ресурсов
 
 
-            // Проверьте, какая тема сейчас активна, и переключите на другую
             if (Resources.MergedDictionaries.Contains(darkTheme))
             {
                 Resources.MergedDictionaries.Remove(darkTheme);
@@ -108,7 +106,7 @@ namespace WpfApp1
             ScrollViewer scrollViewer = sender as ScrollViewer;
 
             // Calculate the new vertical offset
-            double newOffset = scrollViewer.VerticalOffset - (e.Delta > 0 ? 1 : -1) * scrollViewer.ScrollableHeight / 400;
+            double newOffset = scrollViewer.VerticalOffset - (e.Delta > 0 ? 1 : -1) * scrollViewer.ScrollableHeight / 200;
             scrollViewer.ScrollToVerticalOffset(newOffset);
             e.Handled = true;
         }
@@ -118,86 +116,94 @@ namespace WpfApp1
 
         private void OnScrollChanged(object sender, ScrollChangedEventArgs e)
         {
-            if (scrollViewer.Content is ListView listView && listView.Items.Count > 0)
+            try
             {
-                if (scrollTimer != null)
+                if (scrollViewer.Content is ListView listView && listView.Items.Count > 0)
                 {
-                    scrollTimer.Stop();
-                }
-
-                scrollTimer = new DispatcherTimer();
-                scrollTimer.Interval = TimeSpan.FromSeconds(2);
-
-                scrollTimer.Tick += (s, args) =>
-                {
-                    double maxBottom = 0;
-                    MessageModel lastVisibleMessage = null;
-
-                    // Перебираем все элементы в ListView
-                    for (int i = 0; i < listView.Items.Count; i++)
+                    if (scrollTimer != null)
                     {
-                        // Получаем контейнер для текущего элемента
-                        var itemContainer = listView.ItemContainerGenerator.ContainerFromIndex(i) as ListViewItem;
+                        scrollTimer.Stop();
+                    }
 
-                        if (itemContainer != null)
+                    scrollTimer = new DispatcherTimer();
+                    scrollTimer.Interval = TimeSpan.FromSeconds(3);
+
+                    scrollTimer.Tick += (s, args) =>
+                    {
+                        double maxBottom = 0;
+                        MessageModel lastVisibleMessage = null;
+
+                        // Перебираем все элементы в ListView
+                        for (int i = 0; i < listView.Items.Count; i++)
                         {
-                            // Получаем координаты нижней границы текущего элемента относительно ScrollViewer
-                            GeneralTransform transform = itemContainer.TransformToVisual(scrollViewer);
-                            Point bottomPoint = transform.Transform(new Point(0, itemContainer.ActualHeight));
+                            // Получаем контейнер для текущего элемента
+                            var itemContainer = listView.ItemContainerGenerator.ContainerFromIndex(i) as ListViewItem;
 
-                            // Проверяем, если текущий элемент касается нижней границы ListView
-                            if (bottomPoint.Y >= 0 && bottomPoint.Y <= scrollViewer.ActualHeight)
+                            if (itemContainer != null)
                             {
-                                if (bottomPoint.Y > maxBottom)
+                                // Получаем координаты нижней границы текущего элемента относительно ScrollViewer
+                                GeneralTransform transform = itemContainer.TransformToVisual(scrollViewer);
+                                Point bottomPoint = transform.Transform(new Point(0, itemContainer.ActualHeight));
+
+                                // Проверяем, если текущий элемент касается нижней границы ListView
+                                if (bottomPoint.Y >= 0 && bottomPoint.Y <= scrollViewer.ActualHeight)
                                 {
-                                    maxBottom = bottomPoint.Y;
-                                    lastVisibleMessage = listView.Items[i] as MessageModel;
+                                    if (bottomPoint.Y > maxBottom)
+                                    {
+                                        maxBottom = bottomPoint.Y;
+                                        lastVisibleMessage = listView.Items[i] as MessageModel;
+                                    }
                                 }
                             }
                         }
-                    }
 
-                    if (lastVisibleMessage != null)
-                    {
-                        AppDbContextFactory factory = new AppDbContextFactory();
-                        AppDbContext context = factory.CreateDbContext(null);
-                        // Выводим MessageBox
-                        var lastVisibleMessageSentAt = context.dbMessages
-                                .Where(m => m.MessageId == lastVisibleMessage.MessageId)
-                                .Select(m => m.SentAt)
-                                .FirstOrDefault();
-                        if (lastVisibleMessageSentAt != null)
+                        if (lastVisibleMessage != null)
                         {
-                            // Находим все сообщения, отправленные раньше времени последнего видимого сообщения
-                            var messagesToUpdate = context.dbMessages
-                                .Where(m => m.SentAt < lastVisibleMessageSentAt && m.ReceiverId == MainViewModel.authenticatedUser.UserId)
-                                .ToList();
-
-                            // Обновляем статус isRead для найденных сообщений
-                            foreach (var message in messagesToUpdate)
+                            AppDbContextFactory factory = new AppDbContextFactory();
+                            AppDbContext context = factory.CreateDbContext(null);
+                            // Выводим MessageBox
+                            var lastVisibleMessageSentAt = context.dbMessages
+                                    .Where(m => m.MessageId == lastVisibleMessage.MessageId)
+                                    .Select(m => m.SentAt)
+                                    .FirstOrDefault();
+                            //MessageBox.Show(lastVisibleMessageSentAt.ToString());
+                            if (lastVisibleMessageSentAt != null)
                             {
-                                message.IsRead = true;
+                                // Находим все сообщения, отправленные раньше времени последнего видимого сообщения
+                                var messagesToUpdate = context.dbMessages
+                                    .Where(m => m.SentAt <= lastVisibleMessageSentAt && MainViewModel.authenticatedUser.UserId == m.ReceiverId)
+                                    .ToList();
+
+                                // Обновляем статус isRead для найденных сообщений
+                                foreach (var message in messagesToUpdate)
+                                {
+                                    message.IsRead = true;
+                                }
+
+                                // Сохраняем изменения в базе данных
+                                context.SaveChanges();
                             }
 
-                            // Сохраняем изменения в базе данных
-                            context.SaveChanges();
+
+
+
+
                         }
 
+                        // Сбрасываем флаг в false
+                        isScrollingHandled = false;
 
+                        // Останавливаем таймер
+                        scrollTimer.Stop();
+                    };
 
-
-
-                    }
-
-                    // Сбрасываем флаг в false
-                    isScrollingHandled = false;
-
-                    // Останавливаем таймер
-                    scrollTimer.Stop();
-                };
-
-                // Запускаем таймер
-                scrollTimer.Start();
+                    // Запускаем таймер
+                    scrollTimer.Start();
+                }
+            }
+            catch (Exception ex)
+            {
+                System.Windows.MessageBox.Show(ex.Message);
             }
         }
 

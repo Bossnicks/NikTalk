@@ -15,6 +15,13 @@
                             </MultiTrigger.Conditions>
                             <Setter TargetName="border" Property="Background" Value="#bee6fd"/>
                         </MultiTrigger>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsMouseOver" Value="True"/>
+                                <Condition Property="IsEnabled" Value="True"/>
+                            </MultiTrigger.Conditions>
+                            <Setter TargetName="border" Property="Background" Value="#bee6fd"/>
+                        </MultiTrigger>
                         <Trigger Property="IsEnabled" Value="False">
                             <Setter TargetName="border" Property="Background" Value="Transparent"/>
                         </Trigger>

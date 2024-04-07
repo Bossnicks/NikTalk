@@ -15,9 +15,6 @@ using WpfApp1.MVVM.ViewModel;
 
 namespace WpfApp1
 {
-    /// <summary>
-    /// Логика взаимодействия для App.xaml
-    /// </summary>
     public partial class App : Application
     {
         private void OnStartup(object sender, StartupEventArgs e)
@@ -26,13 +23,19 @@ namespace WpfApp1
         }
     }
 
-
     public class AppDbContext : DbContext
     {
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
         {
-            //this.Database.EnsureDeleted();
-            this.Database.EnsureCreated();
+            try
+            {
+                //this.Database.EnsureDeleted();
+                this.Database.EnsureCreated();
+            }
+            catch
+            {
+                System.Windows.MessageBox.Show("Ошибка при подключении к бд");
+            }
 
         }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -44,17 +47,17 @@ namespace WpfApp1
             modelBuilder.Entity<ContactModel>().HasKey(u => u.UserId);
             modelBuilder.Entity<MessageModel>().HasKey(u => u.MessageId);
             modelBuilder.Entity<StickerModel>().HasKey(u => u.StickerId);
-            //modelBuilder.Entity<MessageModel>()
-            //    .HasOne<ContactModel>()
-            //    .WithMany()
-            //    .HasForeignKey(m => m.SenderId)
-            //    .IsRequired();
+            modelBuilder.Entity<MessageModel>()
+                .HasOne<ContactModel>()
+                .WithMany()
+                .HasForeignKey(m => m.SenderId)
+                .IsRequired();
 
-            //modelBuilder.Entity<MessageModel>()
-            //    .HasOne<ContactModel>()
-            //    .WithMany()
-            //    .HasForeignKey(m => m.ReceiverId)
-            //    .IsRequired();
+            modelBuilder.Entity<MessageModel>()
+                .HasOne<ContactModel>()
+                .WithMany()
+                .HasForeignKey(m => m.ReceiverId)
+                .IsRequired();
 
         }
         public DbSet<ContactModel> dbContacts { get; set; }

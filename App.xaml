@@ -6,15 +6,14 @@
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="./Themes/StickerCard.xaml"/>
-                <ResourceDictionary Source="./Themes/ButtonStyles.xaml"/>
-                <ResourceDictionary Source="./Themes/ContactCard.xaml"/>
-                <ResourceDictionary Source="./Themes/MessageBox.xaml"/>
-                <ResourceDictionary Source="./Themes/TextBoxMessage.xaml"/>
-                <ResourceDictionary Source="./Themes/ChatItem.xaml"/>
-                <ResourceDictionary Source="./Themes/DarkTheme.xaml"/>
+                <ResourceDictionary Source="./MVVM/View/StickerCard.xaml"/>
+                <ResourceDictionary Source="./MVVM/View/ButtonStyles.xaml"/>
+                <ResourceDictionary Source="./MVVM/View/ContactCard.xaml"/>
+                <ResourceDictionary Source="./MVVM/View/MessageBox.xaml"/>
+                <ResourceDictionary Source="./MVVM/View/TextBoxMessage.xaml"/>
+                <ResourceDictionary Source="./MVVM/View/ChatItem.xaml"/>
                 <ResourceDictionary Source="./Themes/LightTheme.xaml"/>
-
+                <ResourceDictionary Source="./Themes/DarkTheme.xaml"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>

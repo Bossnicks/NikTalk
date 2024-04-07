@@ -12,19 +12,6 @@ namespace WpfApp1.MVVM.ViewModel
 {
     internal class ContactViewModel : INotifyPropertyChanged
     {
-        //private MessageModel _lastMessage;
-
-        //public MessageModel LastMessage
-        //{
-        //    get { return _lastMessage; }
-        //    set
-        //    {
-        //        _lastMessage = value;
-        //        OnPropertyChanged(nameof(LastMessage));
-        //        this.LastMessage = value;
-        //    }
-        //}
-
         public event PropertyChangedEventHandler? PropertyChanged;
 
         public void OnPropertyChanged([CallerMemberName] string propertyname = null)

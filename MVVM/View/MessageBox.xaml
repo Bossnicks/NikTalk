@@ -4,14 +4,11 @@
         <Setter Property="Foreground" Value="Gray"/>
         <Setter Property="FontWeight" Value="Medium"/>
         <Setter Property="Margin" Value="8"/>
-
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate>
                     <Border CornerRadius="8"
-                            Background="#3e4147">
-
-
+                            Background="{DynamicResource SearchColor}">
                         <Grid>
                             <TextBox VerticalAlignment="Stretch"
                                      VerticalContentAlignment="Center"
@@ -20,8 +17,8 @@
                                      Background="Transparent"
                                      TextWrapping="Wrap"
                                      BorderThickness="0"
-                                     Foreground="White"
-                                     CaretBrush="Gray"
+                                     Foreground="{DynamicResource TextColor}"
+                                     CaretBrush="{DynamicResource LabelColor}"
                                      Margin="8,0,0,0"
                                      Text="{Binding Message, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
                                 <TextBox.InputBindings>
@@ -39,17 +36,16 @@
                                         </Style.Triggers>
                                     </Style>
                                 </TextBox.Style>
-
                             </TextBox>
-
                             <TextBlock IsHitTestVisible="False"
                                        VerticalAlignment="Center"
                                        HorizontalAlignment="Left"
                                        Margin="10,0,0,0"
-                                       Foreground="Gray"
+                                       Foreground="{DynamicResource LabelColor}"
                                        x:Name="TBE">
                                 <TextBlock.Style>
                                     <Style TargetType="{x:Type TextBlock}">
+                                        <Setter Property="Background" Value="{DynamicResource SearchColor}"/>
                                         <Setter Property="Visibility" Value="Collapsed"/>
                                         <Setter Property="Text" Value="Введите текст сообщения"/>
                                         <Style.Triggers>
@@ -63,16 +59,10 @@
                                     </Style>
                                 </TextBlock.Style>
                             </TextBlock>
-
-
                         </Grid>
-
-
                     </Border>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
-
-
     </Style>
 </ResourceDictionary>
