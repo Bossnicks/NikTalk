@@ -1,0 +1,527 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\HP\\Desktop\\NikTalk\\NikTalk\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{EE14555A-7146-48FB-B152-DAB9477CE9C1}|WpfApp1.csproj|c:\\users\\hp\\desktop\\niktalk\\niktalk\\templateselector\\readtemplateselector.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EE14555A-7146-48FB-B152-DAB9477CE9C1}|WpfApp1.csproj|solutionrelative:templateselector\\readtemplateselector.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EE14555A-7146-48FB-B152-DAB9477CE9C1}|WpfApp1.csproj|c:\\users\\hp\\desktop\\niktalk\\niktalk\\mvvm\\trackers\\userupdatedeventargs.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EE14555A-7146-48FB-B152-DAB9477CE9C1}|WpfApp1.csproj|solutionrelative:mvvm\\trackers\\userupdatedeventargs.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EE14555A-7146-48FB-B152-DAB9477CE9C1}|WpfApp1.csproj|c:\\users\\hp\\desktop\\niktalk\\niktalk\\mvvm\\viewmodel\\mainviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EE14555A-7146-48FB-B152-DAB9477CE9C1}|WpfApp1.csproj|solutionrelative:mvvm\\viewmodel\\mainviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EE14555A-7146-48FB-B152-DAB9477CE9C1}|WpfApp1.csproj|c:\\users\\hp\\desktop\\niktalk\\niktalk\\mvvm\\viewmodel\\loginviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EE14555A-7146-48FB-B152-DAB9477CE9C1}|WpfApp1.csproj|solutionrelative:mvvm\\viewmodel\\loginviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EE14555A-7146-48FB-B152-DAB9477CE9C1}|WpfApp1.csproj|c:\\users\\hp\\desktop\\niktalk\\niktalk\\mvvm\\view\\authorization.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EE14555A-7146-48FB-B152-DAB9477CE9C1}|WpfApp1.csproj|solutionrelative:mvvm\\view\\authorization.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EE14555A-7146-48FB-B152-DAB9477CE9C1}|WpfApp1.csproj|c:\\users\\hp\\desktop\\niktalk\\niktalk\\mvvm\\view\\profile.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EE14555A-7146-48FB-B152-DAB9477CE9C1}|WpfApp1.csproj|solutionrelative:mvvm\\view\\profile.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EE14555A-7146-48FB-B152-DAB9477CE9C1}|WpfApp1.csproj|c:\\users\\hp\\desktop\\niktalk\\niktalk\\mvvm\\view\\registerview.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EE14555A-7146-48FB-B152-DAB9477CE9C1}|WpfApp1.csproj|solutionrelative:mvvm\\view\\registerview.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EE14555A-7146-48FB-B152-DAB9477CE9C1}|WpfApp1.csproj|c:\\users\\hp\\desktop\\niktalk\\niktalk\\wpfapp1.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{EE14555A-7146-48FB-B152-DAB9477CE9C1}|WpfApp1.csproj|solutionrelative:wpfapp1.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EE14555A-7146-48FB-B152-DAB9477CE9C1}|WpfApp1.csproj|c:\\users\\hp\\desktop\\niktalk\\niktalk\\mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EE14555A-7146-48FB-B152-DAB9477CE9C1}|WpfApp1.csproj|solutionrelative:mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EE14555A-7146-48FB-B152-DAB9477CE9C1}|WpfApp1.csproj|c:\\users\\hp\\desktop\\niktalk\\niktalk\\mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{EE14555A-7146-48FB-B152-DAB9477CE9C1}|WpfApp1.csproj|solutionrelative:mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EE14555A-7146-48FB-B152-DAB9477CE9C1}|WpfApp1.csproj|c:\\users\\hp\\desktop\\niktalk\\niktalk\\assemblyinfo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EE14555A-7146-48FB-B152-DAB9477CE9C1}|WpfApp1.csproj|solutionrelative:assemblyinfo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EE14555A-7146-48FB-B152-DAB9477CE9C1}|WpfApp1.csproj|c:\\users\\hp\\desktop\\niktalk\\niktalk\\app.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EE14555A-7146-48FB-B152-DAB9477CE9C1}|WpfApp1.csproj|solutionrelative:app.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EE14555A-7146-48FB-B152-DAB9477CE9C1}|WpfApp1.csproj|c:\\users\\hp\\desktop\\niktalk\\niktalk\\app.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{EE14555A-7146-48FB-B152-DAB9477CE9C1}|WpfApp1.csproj|solutionrelative:app.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EE14555A-7146-48FB-B152-DAB9477CE9C1}|WpfApp1.csproj|c:\\users\\hp\\desktop\\niktalk\\niktalk\\themes\\lighttheme.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{EE14555A-7146-48FB-B152-DAB9477CE9C1}|WpfApp1.csproj|solutionrelative:themes\\lighttheme.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EE14555A-7146-48FB-B152-DAB9477CE9C1}|WpfApp1.csproj|c:\\users\\hp\\desktop\\niktalk\\niktalk\\themes\\darktheme.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{EE14555A-7146-48FB-B152-DAB9477CE9C1}|WpfApp1.csproj|solutionrelative:themes\\darktheme.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EE14555A-7146-48FB-B152-DAB9477CE9C1}|WpfApp1.csproj|c:\\users\\hp\\desktop\\niktalk\\niktalk\\templateselector\\messagetemplateselector.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EE14555A-7146-48FB-B152-DAB9477CE9C1}|WpfApp1.csproj|solutionrelative:templateselector\\messagetemplateselector.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EE14555A-7146-48FB-B152-DAB9477CE9C1}|WpfApp1.csproj|c:\\users\\hp\\desktop\\niktalk\\niktalk\\templateselector\\deleteupdatetemplateselector.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EE14555A-7146-48FB-B152-DAB9477CE9C1}|WpfApp1.csproj|solutionrelative:templateselector\\deleteupdatetemplateselector.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EE14555A-7146-48FB-B152-DAB9477CE9C1}|WpfApp1.csproj|c:\\users\\hp\\desktop\\niktalk\\niktalk\\mvvm\\viewmodel\\contactviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EE14555A-7146-48FB-B152-DAB9477CE9C1}|WpfApp1.csproj|solutionrelative:mvvm\\viewmodel\\contactviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EE14555A-7146-48FB-B152-DAB9477CE9C1}|WpfApp1.csproj|c:\\users\\hp\\desktop\\niktalk\\niktalk\\mvvm\\model\\stickermodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EE14555A-7146-48FB-B152-DAB9477CE9C1}|WpfApp1.csproj|solutionrelative:mvvm\\model\\stickermodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EE14555A-7146-48FB-B152-DAB9477CE9C1}|WpfApp1.csproj|c:\\users\\hp\\desktop\\niktalk\\niktalk\\mvvm\\model\\messagemodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EE14555A-7146-48FB-B152-DAB9477CE9C1}|WpfApp1.csproj|solutionrelative:mvvm\\model\\messagemodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EE14555A-7146-48FB-B152-DAB9477CE9C1}|WpfApp1.csproj|c:\\users\\hp\\desktop\\niktalk\\niktalk\\mvvm\\model\\contactmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EE14555A-7146-48FB-B152-DAB9477CE9C1}|WpfApp1.csproj|solutionrelative:mvvm\\model\\contactmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EE14555A-7146-48FB-B152-DAB9477CE9C1}|WpfApp1.csproj|c:\\users\\hp\\desktop\\niktalk\\niktalk\\core\\relaycommand.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EE14555A-7146-48FB-B152-DAB9477CE9C1}|WpfApp1.csproj|solutionrelative:core\\relaycommand.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EE14555A-7146-48FB-B152-DAB9477CE9C1}|WpfApp1.csproj|c:\\users\\hp\\desktop\\niktalk\\niktalk\\core\\observableobject.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EE14555A-7146-48FB-B152-DAB9477CE9C1}|WpfApp1.csproj|solutionrelative:core\\observableobject.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EE14555A-7146-48FB-B152-DAB9477CE9C1}|WpfApp1.csproj|c:\\users\\hp\\desktop\\niktalk\\niktalk\\converters\\converters.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EE14555A-7146-48FB-B152-DAB9477CE9C1}|WpfApp1.csproj|solutionrelative:converters\\converters.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EE14555A-7146-48FB-B152-DAB9477CE9C1}|WpfApp1.csproj|c:\\users\\hp\\desktop\\niktalk\\niktalk\\converters\\bytetoimageconverter.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EE14555A-7146-48FB-B152-DAB9477CE9C1}|WpfApp1.csproj|solutionrelative:converters\\bytetoimageconverter.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EE14555A-7146-48FB-B152-DAB9477CE9C1}|WpfApp1.csproj|c:\\users\\hp\\desktop\\niktalk\\niktalk\\mvvm\\view\\registerview.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{EE14555A-7146-48FB-B152-DAB9477CE9C1}|WpfApp1.csproj|solutionrelative:mvvm\\view\\registerview.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EE14555A-7146-48FB-B152-DAB9477CE9C1}|WpfApp1.csproj|c:\\users\\hp\\desktop\\niktalk\\niktalk\\mvvm\\view\\profile.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{EE14555A-7146-48FB-B152-DAB9477CE9C1}|WpfApp1.csproj|solutionrelative:mvvm\\view\\profile.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EE14555A-7146-48FB-B152-DAB9477CE9C1}|WpfApp1.csproj|c:\\users\\hp\\desktop\\niktalk\\niktalk\\mvvm\\view\\authorization.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{EE14555A-7146-48FB-B152-DAB9477CE9C1}|WpfApp1.csproj|solutionrelative:mvvm\\view\\authorization.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Program Files\\dotnet\\sdk\\8.0.100\\Sdks\\Microsoft.NET.Sdk.WindowsDesktop\\targets\\Microsoft.WinFX.targets||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\HP\\AppData\\Local\\Temp\\.vsdbgsrc\\e7020f3d0fddee574e83a1a14445184af015ae0d8f8f5efb973a861cea9198f0\\XamlReader.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 2,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{eefa5220-e298-11d0-8f78-00a0c9110057}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{3ae79031-e1bc-11d0-8f78-00a0c9110057}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "ReadTemplateSelector.cs",
+              "DocumentMoniker": "C:\\Users\\HP\\Desktop\\NikTalk\\NikTalk\\TemplateSelector\\ReadTemplateSelector.cs",
+              "RelativeDocumentMoniker": "TemplateSelector\\ReadTemplateSelector.cs",
+              "ToolTip": "C:\\Users\\HP\\Desktop\\NikTalk\\NikTalk\\TemplateSelector\\ReadTemplateSelector.cs",
+              "RelativeToolTip": "TemplateSelector\\ReadTemplateSelector.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAiAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-19T07:24:29.665Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "Authorization.xaml.cs",
+              "DocumentMoniker": "C:\\Users\\HP\\Desktop\\NikTalk\\NikTalk\\MVVM\\View\\Authorization.xaml.cs",
+              "RelativeDocumentMoniker": "MVVM\\View\\Authorization.xaml.cs",
+              "ToolTip": "C:\\Users\\HP\\Desktop\\NikTalk\\NikTalk\\MVVM\\View\\Authorization.xaml.cs",
+              "RelativeToolTip": "MVVM\\View\\Authorization.xaml.cs",
+              "ViewState": "AgIAAAUAAAAAAAAAAAAowBcAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-19T07:24:04.69Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "MainViewModel.cs",
+              "DocumentMoniker": "C:\\Users\\HP\\Desktop\\NikTalk\\NikTalk\\MVVM\\ViewModel\\MainViewModel.cs",
+              "RelativeDocumentMoniker": "MVVM\\ViewModel\\MainViewModel.cs",
+              "ToolTip": "C:\\Users\\HP\\Desktop\\NikTalk\\NikTalk\\MVVM\\ViewModel\\MainViewModel.cs",
+              "RelativeToolTip": "MVVM\\ViewModel\\MainViewModel.cs",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAewBIAAAAbAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-19T07:24:04.894Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "LoginViewModel.cs",
+              "DocumentMoniker": "C:\\Users\\HP\\Desktop\\NikTalk\\NikTalk\\MVVM\\ViewModel\\LoginViewModel.cs",
+              "RelativeDocumentMoniker": "MVVM\\ViewModel\\LoginViewModel.cs",
+              "ToolTip": "C:\\Users\\HP\\Desktop\\NikTalk\\NikTalk\\MVVM\\ViewModel\\LoginViewModel.cs",
+              "RelativeToolTip": "MVVM\\ViewModel\\LoginViewModel.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAbAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-19T07:24:04.898Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "UserUpdatedEventArgs.cs",
+              "DocumentMoniker": "C:\\Users\\HP\\Desktop\\NikTalk\\NikTalk\\MVVM\\Trackers\\UserUpdatedEventArgs.cs",
+              "RelativeDocumentMoniker": "MVVM\\Trackers\\UserUpdatedEventArgs.cs",
+              "ToolTip": "C:\\Users\\HP\\Desktop\\NikTalk\\NikTalk\\MVVM\\Trackers\\UserUpdatedEventArgs.cs",
+              "RelativeToolTip": "MVVM\\Trackers\\UserUpdatedEventArgs.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAxAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-19T07:24:04.823Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "MainWindow.xaml.cs",
+              "DocumentMoniker": "C:\\Users\\HP\\Desktop\\NikTalk\\NikTalk\\MainWindow.xaml.cs",
+              "RelativeDocumentMoniker": "MainWindow.xaml.cs",
+              "ToolTip": "C:\\Users\\HP\\Desktop\\NikTalk\\NikTalk\\MainWindow.xaml.cs",
+              "RelativeToolTip": "MainWindow.xaml.cs",
+              "ViewState": "AgIAAGYBAAAAAAAAAAAowHgBAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-19T07:24:04.79Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "WpfApp1.csproj",
+              "DocumentMoniker": "C:\\Users\\HP\\Desktop\\NikTalk\\NikTalk\\WpfApp1.csproj",
+              "RelativeDocumentMoniker": "WpfApp1.csproj",
+              "ToolTip": "C:\\Users\\HP\\Desktop\\NikTalk\\NikTalk\\WpfApp1.csproj",
+              "RelativeToolTip": "WpfApp1.csproj",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2024-10-19T07:24:04.7Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "RegisterView.xaml.cs",
+              "DocumentMoniker": "C:\\Users\\HP\\Desktop\\NikTalk\\NikTalk\\MVVM\\View\\RegisterView.xaml.cs",
+              "RelativeDocumentMoniker": "MVVM\\View\\RegisterView.xaml.cs",
+              "ToolTip": "C:\\Users\\HP\\Desktop\\NikTalk\\NikTalk\\MVVM\\View\\RegisterView.xaml.cs",
+              "RelativeToolTip": "MVVM\\View\\RegisterView.xaml.cs",
+              "ViewState": "AgIAABEAAAAAAAAAAAAowCMAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-19T07:24:04.693Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "Profile.xaml.cs",
+              "DocumentMoniker": "C:\\Users\\HP\\Desktop\\NikTalk\\NikTalk\\MVVM\\View\\Profile.xaml.cs",
+              "RelativeDocumentMoniker": "MVVM\\View\\Profile.xaml.cs",
+              "ToolTip": "C:\\Users\\HP\\Desktop\\NikTalk\\NikTalk\\MVVM\\View\\Profile.xaml.cs",
+              "RelativeToolTip": "MVVM\\View\\Profile.xaml.cs",
+              "ViewState": "AgIAABAAAAAAAAAAAAAowCIAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-19T07:24:04.659Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "MainWindow.xaml",
+              "DocumentMoniker": "C:\\Users\\HP\\Desktop\\NikTalk\\NikTalk\\MainWindow.xaml",
+              "RelativeDocumentMoniker": "MainWindow.xaml",
+              "ToolTip": "C:\\Users\\HP\\Desktop\\NikTalk\\NikTalk\\MainWindow.xaml",
+              "RelativeToolTip": "MainWindow.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2024-10-19T07:24:04.797Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "AssemblyInfo.cs",
+              "DocumentMoniker": "C:\\Users\\HP\\Desktop\\NikTalk\\NikTalk\\AssemblyInfo.cs",
+              "RelativeDocumentMoniker": "AssemblyInfo.cs",
+              "ToolTip": "C:\\Users\\HP\\Desktop\\NikTalk\\NikTalk\\AssemblyInfo.cs",
+              "RelativeToolTip": "AssemblyInfo.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-19T07:24:04.802Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "App.xaml",
+              "DocumentMoniker": "C:\\Users\\HP\\Desktop\\NikTalk\\NikTalk\\App.xaml",
+              "RelativeDocumentMoniker": "App.xaml",
+              "ToolTip": "C:\\Users\\HP\\Desktop\\NikTalk\\NikTalk\\App.xaml",
+              "RelativeToolTip": "App.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2024-10-19T07:24:04.807Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "LightTheme.xaml",
+              "DocumentMoniker": "C:\\Users\\HP\\Desktop\\NikTalk\\NikTalk\\Themes\\LightTheme.xaml",
+              "RelativeDocumentMoniker": "Themes\\LightTheme.xaml",
+              "ToolTip": "C:\\Users\\HP\\Desktop\\NikTalk\\NikTalk\\Themes\\LightTheme.xaml",
+              "RelativeToolTip": "Themes\\LightTheme.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2024-10-19T07:24:04.812Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 17,
+              "Title": "ContactViewModel.cs",
+              "DocumentMoniker": "C:\\Users\\HP\\Desktop\\NikTalk\\NikTalk\\MVVM\\ViewModel\\ContactViewModel.cs",
+              "RelativeDocumentMoniker": "MVVM\\ViewModel\\ContactViewModel.cs",
+              "ToolTip": "C:\\Users\\HP\\Desktop\\NikTalk\\NikTalk\\MVVM\\ViewModel\\ContactViewModel.cs",
+              "RelativeToolTip": "MVVM\\ViewModel\\ContactViewModel.cs",
+              "ViewState": "AgIAAAQAAAAAAAAAAAAowBYAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-19T07:24:04.817Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 20,
+              "Title": "ContactModel.cs",
+              "DocumentMoniker": "C:\\Users\\HP\\Desktop\\NikTalk\\NikTalk\\MVVM\\Model\\ContactModel.cs",
+              "RelativeDocumentMoniker": "MVVM\\Model\\ContactModel.cs",
+              "ToolTip": "C:\\Users\\HP\\Desktop\\NikTalk\\NikTalk\\MVVM\\Model\\ContactModel.cs",
+              "RelativeToolTip": "MVVM\\Model\\ContactModel.cs",
+              "ViewState": "AgIAAK8AAAAAAAAAAAAowLsAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-19T07:24:04.828Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 19,
+              "Title": "MessageModel.cs",
+              "DocumentMoniker": "C:\\Users\\HP\\Desktop\\NikTalk\\NikTalk\\MVVM\\Model\\MessageModel.cs",
+              "RelativeDocumentMoniker": "MVVM\\Model\\MessageModel.cs",
+              "ToolTip": "C:\\Users\\HP\\Desktop\\NikTalk\\NikTalk\\MVVM\\Model\\MessageModel.cs",
+              "RelativeToolTip": "MVVM\\Model\\MessageModel.cs",
+              "ViewState": "AgIAAIwAAAAAAAAAAAAowJ4AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-19T07:24:04.836Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 18,
+              "Title": "StickerModel.cs",
+              "DocumentMoniker": "C:\\Users\\HP\\Desktop\\NikTalk\\NikTalk\\MVVM\\Model\\StickerModel.cs",
+              "RelativeDocumentMoniker": "MVVM\\Model\\StickerModel.cs",
+              "ToolTip": "C:\\Users\\HP\\Desktop\\NikTalk\\NikTalk\\MVVM\\Model\\StickerModel.cs",
+              "RelativeToolTip": "MVVM\\Model\\StickerModel.cs",
+              "ViewState": "AgIAAC8AAAAAAAAAAAAowEEAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-19T07:24:04.843Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "App.xaml.cs",
+              "DocumentMoniker": "C:\\Users\\HP\\Desktop\\NikTalk\\NikTalk\\App.xaml.cs",
+              "RelativeDocumentMoniker": "App.xaml.cs",
+              "ToolTip": "C:\\Users\\HP\\Desktop\\NikTalk\\NikTalk\\App.xaml.cs",
+              "RelativeToolTip": "App.xaml.cs",
+              "ViewState": "AgIAAD4AAAAAAAAAAAAowFAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-19T07:24:04.851Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "DarkTheme.xaml",
+              "DocumentMoniker": "C:\\Users\\HP\\Desktop\\NikTalk\\NikTalk\\Themes\\DarkTheme.xaml",
+              "RelativeDocumentMoniker": "Themes\\DarkTheme.xaml",
+              "ToolTip": "C:\\Users\\HP\\Desktop\\NikTalk\\NikTalk\\Themes\\DarkTheme.xaml",
+              "RelativeToolTip": "Themes\\DarkTheme.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2024-10-19T07:24:04.858Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 21,
+              "Title": "RelayCommand.cs",
+              "DocumentMoniker": "C:\\Users\\HP\\Desktop\\NikTalk\\NikTalk\\Core\\RelayCommand.cs",
+              "RelativeDocumentMoniker": "Core\\RelayCommand.cs",
+              "ToolTip": "C:\\Users\\HP\\Desktop\\NikTalk\\NikTalk\\Core\\RelayCommand.cs",
+              "RelativeToolTip": "Core\\RelayCommand.cs",
+              "ViewState": "AgIAABgAAAAAAAAAAAAowCoAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-19T07:24:04.863Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 22,
+              "Title": "ObservableObject.cs",
+              "DocumentMoniker": "C:\\Users\\HP\\Desktop\\NikTalk\\NikTalk\\Core\\ObservableObject.cs",
+              "RelativeDocumentMoniker": "Core\\ObservableObject.cs",
+              "ToolTip": "C:\\Users\\HP\\Desktop\\NikTalk\\NikTalk\\Core\\ObservableObject.cs",
+              "RelativeToolTip": "Core\\ObservableObject.cs",
+              "ViewState": "AgIAAAIAAAAAAAAAAAAowBQAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-19T07:24:04.869Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 23,
+              "Title": "Converters.cs",
+              "DocumentMoniker": "C:\\Users\\HP\\Desktop\\NikTalk\\NikTalk\\Converters\\Converters.cs",
+              "RelativeDocumentMoniker": "Converters\\Converters.cs",
+              "ToolTip": "C:\\Users\\HP\\Desktop\\NikTalk\\NikTalk\\Converters\\Converters.cs",
+              "RelativeToolTip": "Converters\\Converters.cs",
+              "ViewState": "AgIAABYAAAAAAAAAAAAowCgAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-19T07:24:04.874Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 24,
+              "Title": "ByteToImageConverter.cs",
+              "DocumentMoniker": "C:\\Users\\HP\\Desktop\\NikTalk\\NikTalk\\Converters\\ByteToImageConverter.cs",
+              "RelativeDocumentMoniker": "Converters\\ByteToImageConverter.cs",
+              "ToolTip": "C:\\Users\\HP\\Desktop\\NikTalk\\NikTalk\\Converters\\ByteToImageConverter.cs",
+              "RelativeToolTip": "Converters\\ByteToImageConverter.cs",
+              "ViewState": "AgIAADwAAAAAAAAAAAAowE4AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-19T07:24:04.88Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 16,
+              "Title": "DeleteUpdateTemplateSelector.cs",
+              "DocumentMoniker": "C:\\Users\\HP\\Desktop\\NikTalk\\NikTalk\\TemplateSelector\\DeleteUpdateTemplateSelector.cs",
+              "RelativeDocumentMoniker": "TemplateSelector\\DeleteUpdateTemplateSelector.cs",
+              "ToolTip": "C:\\Users\\HP\\Desktop\\NikTalk\\NikTalk\\TemplateSelector\\DeleteUpdateTemplateSelector.cs",
+              "RelativeToolTip": "TemplateSelector\\DeleteUpdateTemplateSelector.cs",
+              "ViewState": "AgIAAAwAAAAAAAAAAAAowB4AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-19T07:24:04.885Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 15,
+              "Title": "MessageTemplateSelector.cs",
+              "DocumentMoniker": "C:\\Users\\HP\\Desktop\\NikTalk\\NikTalk\\TemplateSelector\\MessageTemplateSelector.cs",
+              "RelativeDocumentMoniker": "TemplateSelector\\MessageTemplateSelector.cs",
+              "ToolTip": "C:\\Users\\HP\\Desktop\\NikTalk\\NikTalk\\TemplateSelector\\MessageTemplateSelector.cs",
+              "RelativeToolTip": "TemplateSelector\\MessageTemplateSelector.cs",
+              "ViewState": "AgIAABgAAAAAAAAAAAAowCoAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-19T07:24:04.89Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 25,
+              "Title": "RegisterView.xaml",
+              "DocumentMoniker": "C:\\Users\\HP\\Desktop\\NikTalk\\NikTalk\\MVVM\\View\\RegisterView.xaml",
+              "RelativeDocumentMoniker": "MVVM\\View\\RegisterView.xaml",
+              "ToolTip": "C:\\Users\\HP\\Desktop\\NikTalk\\NikTalk\\MVVM\\View\\RegisterView.xaml",
+              "RelativeToolTip": "MVVM\\View\\RegisterView.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2024-10-19T07:24:04.902Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 27,
+              "Title": "Authorization.xaml",
+              "DocumentMoniker": "C:\\Users\\HP\\Desktop\\NikTalk\\NikTalk\\MVVM\\View\\Authorization.xaml",
+              "RelativeDocumentMoniker": "MVVM\\View\\Authorization.xaml",
+              "ToolTip": "C:\\Users\\HP\\Desktop\\NikTalk\\NikTalk\\MVVM\\View\\Authorization.xaml",
+              "RelativeToolTip": "MVVM\\View\\Authorization.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2024-10-19T07:24:04.905Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 26,
+              "Title": "Profile.xaml",
+              "DocumentMoniker": "C:\\Users\\HP\\Desktop\\NikTalk\\NikTalk\\MVVM\\View\\Profile.xaml",
+              "RelativeDocumentMoniker": "MVVM\\View\\Profile.xaml",
+              "ToolTip": "C:\\Users\\HP\\Desktop\\NikTalk\\NikTalk\\MVVM\\View\\Profile.xaml",
+              "RelativeToolTip": "MVVM\\View\\Profile.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2024-10-19T07:24:04.911Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 28,
+              "Title": "Microsoft.WinFX.targets",
+              "DocumentMoniker": "C:\\Program Files\\dotnet\\sdk\\8.0.100\\Sdks\\Microsoft.NET.Sdk.WindowsDesktop\\targets\\Microsoft.WinFX.targets",
+              "RelativeDocumentMoniker": "..\\..\\..\\..\\..\\Program Files\\dotnet\\sdk\\8.0.100\\Sdks\\Microsoft.NET.Sdk.WindowsDesktop\\targets\\Microsoft.WinFX.targets",
+              "ToolTip": "C:\\Program Files\\dotnet\\sdk\\8.0.100\\Sdks\\Microsoft.NET.Sdk.WindowsDesktop\\targets\\Microsoft.WinFX.targets",
+              "RelativeToolTip": "..\\..\\..\\..\\..\\Program Files\\dotnet\\sdk\\8.0.100\\Sdks\\Microsoft.NET.Sdk.WindowsDesktop\\targets\\Microsoft.WinFX.targets",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003801|",
+              "WhenOpened": "2024-02-09T18:49:52.467Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 29,
+              "Title": "XamlReader.cs",
+              "DocumentMoniker": "C:\\Users\\HP\\AppData\\Local\\Temp\\.vsdbgsrc\\e7020f3d0fddee574e83a1a14445184af015ae0d8f8f5efb973a861cea9198f0\\XamlReader.cs",
+              "RelativeDocumentMoniker": "..\\..\\..\\AppData\\Local\\Temp\\.vsdbgsrc\\e7020f3d0fddee574e83a1a14445184af015ae0d8f8f5efb973a861cea9198f0\\XamlReader.cs",
+              "ToolTip": "C:\\Users\\HP\\AppData\\Local\\Temp\\.vsdbgsrc\\e7020f3d0fddee574e83a1a14445184af015ae0d8f8f5efb973a861cea9198f0\\XamlReader.cs",
+              "RelativeToolTip": "..\\..\\..\\AppData\\Local\\Temp\\.vsdbgsrc\\e7020f3d0fddee574e83a1a14445184af015ae0d8f8f5efb973a861cea9198f0\\XamlReader.cs",
+              "ViewState": "AgIAAO8BAAAAAAAAAAD4v/8BAAADAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2023-12-19T13:42:14.367Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

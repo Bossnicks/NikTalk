@@ -4,17 +4,17 @@
 winexe
 C#
 .cs
-C:\Users\HP\Флешка\Рабочий стол\Reserve++\all_versions\Версия_9\WpfApp1\obj\Debug\net8.0-windows\
+C:\Users\HP\Desktop\NikTalk\NikTalk\obj\Debug\net8.0-windows\
 WpfApp1
 none
 false
 TRACE;DEBUG;NET;NET8_0;NETCOREAPP
-C:\Users\HP\Флешка\Рабочий стол\Reserve++\all_versions\Версия_9\WpfApp1\App.xaml
-13-1893415228
+C:\Users\HP\Desktop\NikTalk\NikTalk\App.xaml
+12-672576016
 
-21946246978
-228-1056095127
-MainWindow.xaml;MVVM\View\Authorization.xaml;MVVM\View\LoginView.xaml;MVVM\View\Profile.xaml;MVVM\View\RegisterView.xaml;Themes\ButtonStyles.xaml;Themes\ChatItem.xaml;Themes\ContactCard.xaml;Themes\DarkTheme.xaml;Themes\LightTheme.xaml;Themes\MessageBox.xaml;Themes\StickerCard.xaml;Themes\TextBoxMessage.xaml;
+21-324299637
+228131217543
+MainWindow.xaml;MVVM\View\Authorization.xaml;MVVM\View\ButtonStyles.xaml;MVVM\View\ChatItem.xaml;MVVM\View\ContactCard.xaml;MVVM\View\MessageBox.xaml;MVVM\View\Profile.xaml;MVVM\View\RegisterView.xaml;MVVM\View\StickerCard.xaml;MVVM\View\TextBoxMessage.xaml;Themes\DarkTheme.xaml;Themes\LightTheme.xaml;
 
 False
 

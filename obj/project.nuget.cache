@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "ify69O2Vh7c2r9rDZtWKtw/iM59/1oUdm4yMrFZDLZw2POAvkcF8uA80Cl68iNfOmbmh8WHYukEbdYKOeckQVg==",
+  "dgSpecHash": "JjS8gtkF+J0=",
   "success": true,
-  "projectFilePath": "D:\\Флешка\\Рабочий стол\\Reserve++\\all_versions\\Версия_9\\WpfApp1\\WpfApp1.csproj",
+  "projectFilePath": "C:\\Users\\HP\\Desktop\\NikTalk\\NikTalk\\WpfApp1.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\HP\\.nuget\\packages\\microsoft.entityframeworkcore\\8.0.0\\microsoft.entityframeworkcore.8.0.0.nupkg.sha512",
     "C:\\Users\\HP\\.nuget\\packages\\microsoft.entityframeworkcore.abstractions\\8.0.0\\microsoft.entityframeworkcore.abstractions.8.0.0.nupkg.sha512",
